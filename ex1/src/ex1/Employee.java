@@ -45,4 +45,29 @@ public abstract class Employee {
 		return FirstName + " " + LastName + " " + ID;
 	}
 
+	
+
+	 @Override
+	    public boolean equals(Object o) { 
+	  
+	        // If the object is compared with itself then return true   
+	        if (o == this) { 
+	            return true; 
+	        } 
+	      
+	        /* Check if o is an instance of Complex or not 
+	          "null instanceof [type]" also returns false */
+	        if (!(o instanceof Employee)) { 
+	            return false; 
+	        } 
+	          
+	        // typecast o to Complex so that we can compare data members  
+	        Employee c = (Employee) o; 
+	          
+	        // Compare the data members and return accordingly  
+	        return  FirstName.equals(c.FirstName)
+	                &&   LastName.equals(c.LastName)
+	                && ID.equals(c.ID);
+	    } 
+	
 }
