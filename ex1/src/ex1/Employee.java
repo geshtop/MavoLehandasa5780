@@ -4,6 +4,7 @@ public abstract class Employee {
 		FirstName = "Plony";
 		LastName = "Almony";
 		ID = "0";
+		////////
 	}
 
 	Employee(String _FirstName, String _LastName, String _ID) {
