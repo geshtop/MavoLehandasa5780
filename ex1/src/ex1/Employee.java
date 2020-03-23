@@ -19,7 +19,10 @@ public abstract class Employee {
 	public String getFirstName() {
 		return FirstName;
 	}
-
+	
+	abstract Float earnings();
+	
+	
 	public void setFirstName(String _FirstName) {
 		this.FirstName = _FirstName;
 	}
@@ -42,7 +45,7 @@ public abstract class Employee {
 
 	@Override
 	public String toString() {
-		return FirstName + " " + LastName + " " + ID;
+		return "FirstName: " + FirstName + " LastName: " + LastName + " ID: " + ID;
 	}
 
 	
