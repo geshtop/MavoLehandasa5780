@@ -4,6 +4,7 @@ public class CommissionEmployee extends Employee {
 	CommissionEmployee(){
 		
 	}
+	//more test
 	//new test from eclipse
 	@Override
 	Float earnings() {
