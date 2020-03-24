@@ -61,7 +61,7 @@ public class BasePlusCommissionEmployee extends CommissionEmployee {
 	//new test from eclipse
 	@Override
 	Float earnings() {
-		return super.earnings() + baseSalary;
+		return (float) ((super.earnings() + baseSalary) * 1.1);
 		
 	}
 

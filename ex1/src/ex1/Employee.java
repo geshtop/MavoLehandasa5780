@@ -41,6 +41,7 @@ public abstract class Employee {
 	}
 
 	public void setID(String _ID) {
+		//if(ID.length()< 6 || ID.length()> 9) throw Exception("ID length 6-9");
 		this.ID = _ID;
 	}
 

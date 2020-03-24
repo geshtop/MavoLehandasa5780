@@ -20,7 +20,7 @@ public class CommissionEmployee extends Employee {
 	}
 
 	public void setHours(Integer _commision) throws Exception {
-		if(commision < 1) throw new Exception("The commision need to be greater than zero");
+		if(commision < 0 || commision > 100) throw new Exception("The commision need to be between 0-100");
 
 		this.commision = _commision;
 	}
@@ -32,6 +32,7 @@ public class CommissionEmployee extends Employee {
 
 	public void setGrossSales(Float _grossSales) throws Exception {
 		if(_grossSales < 0) throw new Exception("The grossSales need to be greater than zero");
+		
 		this.grossSales = _grossSales;
 	}
 
