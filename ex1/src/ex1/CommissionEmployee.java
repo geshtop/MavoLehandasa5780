@@ -38,7 +38,7 @@ public class CommissionEmployee extends Employee {
 	
 	@Override
 	public String toString() {
-		return  super.toString() + "grossSales:" +  this.grossSales + "commision: " + this.commision;
+		return  super.toString() + " grossSales:" +  this.grossSales + " commision: " + this.commision;
 	}
 
 	
@@ -73,7 +73,7 @@ public class CommissionEmployee extends Employee {
 	//new test from eclipse
 	@Override
 	Float earnings() {
-		return commision/100*grossSales;
+		return (float) commision/100*grossSales;
 		
 	}
 
