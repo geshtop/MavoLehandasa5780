@@ -19,8 +19,8 @@ public class CommissionEmployee extends Employee {
 		return commision;
 	}
 
-	public void setHours(Integer _commision) throws Exception {
-		if(commision < 0 || commision > 100) throw new Exception("The commision need to be between 0-100");
+	public void setHours(Integer _commision)  {
+		if(commision < 0 || commision > 100)  throw new IllegalArgumentException("The commision need to be between 0-100");
 
 		this.commision = _commision;
 	}
@@ -30,8 +30,8 @@ public class CommissionEmployee extends Employee {
 		return grossSales;
 	}
 
-	public void setGrossSales(Float _grossSales) throws Exception {
-		if(_grossSales < 0) throw new Exception("The grossSales need to be greater than zero");
+	public void setGrossSales(Float _grossSales)  {
+		if(_grossSales < 0) throw new IllegalArgumentException("The grossSales need to be greater than zero");
 		
 		this.grossSales = _grossSales;
 	}
@@ -39,7 +39,7 @@ public class CommissionEmployee extends Employee {
 	
 	@Override
 	public String toString() {
-		return  super.toString() + " grossSales:" +  this.grossSales + " commision: " + this.commision;
+		return  super.toString() + " grossSales:" + String.format("%.02f", this.grossSales)   + " commision: " + this.commision;
 	}
 
 	

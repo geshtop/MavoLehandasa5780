@@ -20,14 +20,14 @@ public class BasePlusCommissionEmployee extends CommissionEmployee {
 	}
 
 	public void setBaseSalary(Float _baseSalary) throws Exception {
-		if(_baseSalary < 0) throw new Exception("The baseSalary need to be greater than zero");
+		if(_baseSalary < 0) throw   new IllegalArgumentException("The baseSalary need to be greater than zero");
 		this.baseSalary = _baseSalary;
 	}
 
 	
 	@Override
 	public String toString() {
-		return  super.toString() + " baseSalary:" +  this.baseSalary;
+		return  super.toString() + " baseSalary:" +  String.format("%.02f",  this.baseSalary) ;
 	}
 
 	

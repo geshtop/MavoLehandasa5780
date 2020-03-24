@@ -1,3 +1,4 @@
+
 package ex1;
 public abstract class Employee {
 	Employee() {
@@ -41,7 +42,12 @@ public abstract class Employee {
 	}
 
 	public void setID(String _ID) {
-		//if(ID.length()< 6 || ID.length()> 9) throw Exception("ID length 6-9");
+		if(ID.length()< 6 || ID.length()> 9) throw new IllegalArgumentException("ID length 6-9");
+		 try {  
+	         Integer.parseInt(_ID);  
+	      } catch (NumberFormatException e) {  
+	    	  throw new NumberFormatException();
+	      }  
 		this.ID = _ID;
 	}
 

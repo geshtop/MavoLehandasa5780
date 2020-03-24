@@ -22,8 +22,8 @@ public class HourlyEmployee  extends Employee {
 		return hours;
 	}
 
-	public void setHours(Integer _hours) throws Exception {
-		if(_hours < 1) throw new Exception("The hours need to be greater than zero");
+	public void setHours(Integer _hours)  {
+		if(_hours < 1)  throw new IllegalArgumentException("The hours need to be greater than zero");
 
 		this.hours = _hours;
 	}
@@ -33,15 +33,15 @@ public class HourlyEmployee  extends Employee {
 		return wage;
 	}
 
-	public void setHours(Float _wage) throws Exception {
-		if(_wage < 0) throw new Exception("The _wage need to be greater than zero");
+	public void setHours(Float _wage)  {
+		if(_wage < 0)  throw new IllegalArgumentException("The _wage need to be greater than zero");
 		this.wage = _wage;
 	}
 
 	
 	@Override
 	public String toString() {
-		return  super.toString() + " hours:" +  this.hours + " wage: " + this.wage;
+		return  super.toString() + " hours:" +  this.hours + " wage: " + String.format("%.02f", this.wage); 
 	}
 
 	
