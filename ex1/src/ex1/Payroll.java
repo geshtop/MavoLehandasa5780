@@ -1,7 +1,6 @@
 package ex1;
 //Geula Shoshan 011826658 g@geshtop.com
-//Tamar Sebbag 
-
+//Tamar Sebbag 855054 tamarseb@gmail.com
 public class Payroll {
 
 	public static void main(String[] args) {
