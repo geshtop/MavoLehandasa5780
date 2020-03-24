@@ -1,4 +1,6 @@
 package ex1;
+//Geula Shoshan 011826658 g@geshtop.com
+//Tamar Sebbag 
 
 public class Payroll {
 
