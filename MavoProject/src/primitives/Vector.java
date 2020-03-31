@@ -1,7 +1,5 @@
 package primitives;
 
-import static primitives.Util.isZero;
-
 public class Vector {
 	//private
 	Point3D _head;
@@ -18,19 +16,20 @@ public class Vector {
 	
 	public Vector(Coordinate x, Coordinate y, Coordinate z) {
 		Point3D p = new Point3D(x,y,z);
-		if(p.equals( Point3D.ZERO))
-			throw new  IllegalArgumentException("The vector cannot be zero");
+		//if(p.equals( Point3D.ZERO))
+		//	throw new  IllegalArgumentException("The vector cannot be zero");
 		this._head = p;
 	}
 	public Vector(double x, double y, double z) {
 		Point3D p = new Point3D(x,y,z);
-		if(p.equals( Point3D.ZERO))
+		
+		if(p.equals(Point3D.ZERO) )
 			throw new  IllegalArgumentException("The vector cannot be zero");
 		_head =p;
 	}
 	Vector(Point3D head){
-		if(head.equals(Point3D.ZERO))
-			throw new  IllegalArgumentException("The vector cannot be zero");
+		//if(head.equals(Point3D.ZERO))
+		//	throw new  IllegalArgumentException("The vector cannot be zero");
 		this._head = head;
 	}
 
@@ -99,11 +98,12 @@ public class Vector {
 	
 	  @Override
 	   public boolean equals(Object obj) {
+		 
 	      if (this == obj) return true;
 	      if (obj == null) return false;
 	      if (!(obj instanceof Vector)) return false;
 	      Vector oth = (Vector)obj;
-	      return _head.equals(oth._head);
+	      return _head == oth._head;
 	   }
 
 	   

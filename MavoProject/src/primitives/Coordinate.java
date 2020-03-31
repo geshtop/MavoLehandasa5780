@@ -58,9 +58,10 @@ public final class Coordinate {
     /*************** Admin *****************/
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
+    	
+        if (this == obj) return true;    
         if (obj == null) return false;
-        if (!(obj instanceof Coordinate)) return false;
+        if (!(obj instanceof Coordinate)) return false;   
         return isZero(_coord - ((Coordinate)obj)._coord);
     }
 
