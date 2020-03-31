@@ -9,6 +9,12 @@ public class Vector {
 	public static Vector ZERO = new Vector(0,0,0);
 	
 	//ctor
+	/**
+	 * 
+	 * @param x its the first coordinate
+	 * @param y
+	 * @param z
+	 */
 	
 	public Vector(Coordinate x, Coordinate y, Coordinate z) {
 		Point3D p = new Point3D(x,y,z);
