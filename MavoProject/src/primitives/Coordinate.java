@@ -13,7 +13,7 @@ public final class Coordinate {
      * Coordinate value, intentionally "package-friendly" due to performance
      * constraints
      */
-    double _coord;
+    final double _coord;
 
     /**
      * Coordinate constructor receiving a coordinate value
@@ -45,11 +45,16 @@ public final class Coordinate {
 
    
     
-    public void add(Coordinate other) {
+    public double add(Coordinate other) {
 		
-		 this._coord +=other.get();
+		return this._coord +other.get();
 
 	}
+    
+    public double subtract (Coordinate other) {
+		return this._coord -other.get();
+
+    }
     /*************** Admin *****************/
     @Override
     public boolean equals(Object obj) {

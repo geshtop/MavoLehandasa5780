@@ -47,17 +47,33 @@ public class Point3D {
 	
 	//methods
 	public Vector subtract(Point3D point3d) {
-		return new Vector(0,0,0);
+		double x = this._x.get() - point3d._x.get();
+		double y = this._y.get() - point3d._y.get();
+		double z = this._z.get() - point3d._z.get();
+
+		return new Vector(new Point3D(x,y,z));
 	}
 	
-	public void add(Vector vector) {
-		
-		this._x.add(vector.get_head()._x);
-		this._y.add(vector.get_head()._y);
-		this._z.add(vector.get_head()._z);
+	public Point3D add(Vector vector) {
+		double x = this._x.subtract(vector._head._x);
+		double y = this._y.subtract(vector._head._y);
+		double z = this._z.subtract(vector._head._z);
+		return new Point3D(x,y,z);
 
 	}
+	
+	
 
+	public double 	distanceSquared (Point3D point3d) {
+		double x = point3d._x.subtract(this._x);
+		double y = point3d._y.subtract(this._y);
+		double z = point3d._z.subtract(this._z);
+		return (x*x + y*y + z*z);
+	}
+	public double 	distance (Point3D point3d) {
+		return Math.sqrt(distanceSquared(point3d));
+	}
+	
 
 
 	

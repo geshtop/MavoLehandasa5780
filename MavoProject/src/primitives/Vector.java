@@ -9,21 +9,23 @@ public class Vector {
 	public static Vector ZERO = new Vector(0,0,0);
 	
 	//ctor
-	Vector(Point3D head){
-		if(head== Point3D.ZERO)
-			throw new  IllegalArgumentException("The vector cannot be zero");
-		this._head = head;
-		
-		
-	}
 	
-	
-	
-	public Vector(int x, int y, int z) {
+	public Vector(Coordinate x, Coordinate y, Coordinate z) {
 		Point3D p = new Point3D(x,y,z);
-		if(p== Point3D.ZERO)
+		if(p.equals( Point3D.ZERO))
+			throw new  IllegalArgumentException("The vector cannot be zero");
+		this._head = p;
+	}
+	public Vector(double x, double y, double z) {
+		Point3D p = new Point3D(x,y,z);
+		if(p.equals( Point3D.ZERO))
 			throw new  IllegalArgumentException("The vector cannot be zero");
 		_head =p;
+	}
+	Vector(Point3D head){
+		if(head.equals(Point3D.ZERO))
+			throw new  IllegalArgumentException("The vector cannot be zero");
+		this._head = head;
 	}
 
 	public Vector(Vector v) {
@@ -40,41 +42,53 @@ public class Vector {
 	
 	//methods
 	public Vector	subtract (Vector other) {
-		return null;
-		}
+		return new Vector(this._head.subtract(other._head));
+	}
 
 	public Vector	add (Vector other) {
-		return null;
-		}
+		return new Vector(this._head.add(other));
+	}
 	public Vector	scale (int scalar) {
-		return null;
+		double x = _head.get_x().get() * scalar;
+		double y = _head.get_y().get() * scalar;
+		double z = _head.get_z().get() * scalar;
+
+		return new Vector(x,y,z);
 	}
 	
-	public int 	dotProduct (Vector other) {
-		int product = 0;
-	      // product = product +_head.get_x()._coord *other._head.get_x().get(); 
-		return 0;
+	public double 	dotProduct (Vector other) {
+		return this._head.get_x().get() * other._head.get_x().get()
+				+this._head.get_y().get() * other._head.get_y().get()
+				+this._head.get_z().get() * other._head.get_z().get();
 	}
 	
 	public Vector 	crossProduct (Vector other) {
-		return null;
+		double x = this._head.get_y().get()* other._head.get_z().get()  - this._head.get_z().get() *  other._head.get_y().get(); 
+		double y  =  this._head.get_z().get() *  other._head.get_x().get() - this._head.get_x().get() *  other._head.get_z().get(); 
+		double z=  this._head.get_x().get() *  other._head.get_y().get()  -  this._head.get_y().get() * other._head.get_x().get(); 
+		return new Vector(x,y,z);
+		
+		
 	}
 	
 	
-	public int 	lengthSquared () {
-		return 0;
+	public double 	lengthSquared () {
+		
+		return dotProduct(this);
 	}
-	public int 	length  () {
-		return 0;
+	public double 	length  () {
+		return Math.sqrt(lengthSquared());
 	}
 	
 	public Vector 	normalize () {
-		
+		double length = length();
+		this._head = new Point3D(this._head.get_x().get() / length, this._head.get_y().get() / length, this._head.get_z().get() / length );
 		return this;
 	}
 	
 	public Vector 	normalized () {
-		return null;
+		normalize();
+		return this;
 	}
 	
 	  @Override
