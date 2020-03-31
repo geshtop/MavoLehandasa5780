@@ -1,7 +1,8 @@
 import primitives.*;
 import static java.lang.System.out;
 import static primitives.Util.*;
-
+//Geula Shoshan 011826658 g@geshtop.com
+//Tamar Sebbag 855054 tamarseb@gmail.com
 /**
  * Test program for the 1st stage
  *
