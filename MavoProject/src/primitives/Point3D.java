@@ -55,9 +55,9 @@ public class Point3D {
 	}
 	
 	public Point3D add(Vector vector) {
-		double x = this._x.subtract(vector._head._x);
-		double y = this._y.subtract(vector._head._y);
-		double z = this._z.subtract(vector._head._z);
+		double x = this._x.add(vector._head._x);
+		double y = this._y.add(vector._head._y);
+		double z = this._z.add(vector._head._z);
 		return new Point3D(x,y,z);
 
 	}

@@ -92,7 +92,8 @@ public class Vector {
 	
 	public Vector 	normalized () {
 		normalize();
-		return this;
+		return new Vector(this);
+		//return this;
 	}
 	
 	  @Override
