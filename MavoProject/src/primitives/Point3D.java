@@ -85,7 +85,7 @@ public class Point3D {
 	      if (obj == null) return false;
 	      if (!(obj instanceof Point3D)) return false;
 	      Point3D oth = (Point3D)obj;
-	      return _x== oth._x && _y ==oth._y  && _z == oth._z;
+	      return _x.equals(oth._x) &&  _y.equals(oth._y)   && _z.equals(oth._z) ;
 	   }
 
 	   

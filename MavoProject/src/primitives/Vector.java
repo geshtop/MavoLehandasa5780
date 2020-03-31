@@ -4,7 +4,6 @@ public class Vector {
 	//private
 	Point3D _head;
 	
-	public static Vector ZERO = new Vector(0,0,0);
 	
 	//ctor
 	/**
@@ -16,8 +15,8 @@ public class Vector {
 	
 	public Vector(Coordinate x, Coordinate y, Coordinate z) {
 		Point3D p = new Point3D(x,y,z);
-		//if(p.equals( Point3D.ZERO))
-		//	throw new  IllegalArgumentException("The vector cannot be zero");
+		if(p.equals( Point3D.ZERO))
+			throw new  IllegalArgumentException("The vector cannot be zero");
 		this._head = p;
 	}
 	public Vector(double x, double y, double z) {
@@ -28,8 +27,8 @@ public class Vector {
 		_head =p;
 	}
 	Vector(Point3D head){
-		//if(head.equals(Point3D.ZERO))
-		//	throw new  IllegalArgumentException("The vector cannot be zero");
+		if(head.equals(Point3D.ZERO))
+			throw new  IllegalArgumentException("The vector cannot be zero");
 		this._head = head;
 	}
 
@@ -103,7 +102,7 @@ public class Vector {
 	      if (obj == null) return false;
 	      if (!(obj instanceof Vector)) return false;
 	      Vector oth = (Vector)obj;
-	      return _head == oth._head;
+	      return _head.equals(oth._head);
 	   }
 
 	   
