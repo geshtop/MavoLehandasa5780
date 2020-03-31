@@ -1,7 +1,11 @@
 package primitives;
 
 public class Point3D {
-	//private
+	//**************************************************************************//
+	//********************************PRIVATE***********************************//
+	//**************************************************************************//
+
+	
 	private Coordinate _x;
 	private Coordinate _y;
 	private Coordinate _z;
@@ -9,27 +13,47 @@ public class Point3D {
 
 	public static Point3D ZERO = new Point3D(0,0,0);
 	
+	//**************************************************************************//
+	//***********************************CTOR***********************************//
+	//**************************************************************************//
 	
-	//ctor
+	/**
+	 * this ctor get 3 double parameter and create the point
+	 * @param x - the first double paramter
+	 * @param y - double parameter
+	 * @param z - double paramter
+	 */
 	public Point3D(double x, double y, double z) {
 		_x = new Coordinate( x);
 		_y = new Coordinate( y);
 		_z =new Coordinate( z);
 	}
 	
+	/**
+	 * this ctor get 3 coordinate
+	 * @param x as coordinate
+	 * @param y  as coordinate
+	 * @param z  as coordinate
+	 */
 	public Point3D(Coordinate x, Coordinate y, Coordinate z) {
 		_x = x;
 		_y =y;
 		_z =z;
 	}
 	
+	/**
+	 * copy ctor
+	 * @param other
+	 */
 	public Point3D(Point3D other) {
 		_x = other._x;
 		_y = other._y;
 		_z =other._z;
 	}
 	
-	//getter setter
+	//**************************************************************************//
+	//*******************************GETTER SETTER******************************//
+	//**************************************************************************//
 	
 	public Coordinate get_x() {
 		return _x;
