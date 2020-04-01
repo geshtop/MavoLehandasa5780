@@ -18,7 +18,11 @@ public class Plane implements Geometry {
 		//TODO
 
 	}
-	
+	/**
+	 * 
+	 * @param p
+	 * @param normal
+	 */
 	public Plane(Point3D p, Vector normal) {
 		this._p = p;
 		this._normal = normal.normalized();
