@@ -11,6 +11,7 @@ import org.junit.Test;
 import primitives.*;
 
 /**
+ * Unit tests for primitives.Vector class
  * @author Owner
  *
  */

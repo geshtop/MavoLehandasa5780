@@ -8,6 +8,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
+ * Unit tests for geometries.Sphere class
  * @author Tamar Sebbag
  *
  */
@@ -18,7 +19,7 @@ public class SphereTests {
 	 */
 	@Test
 	public void testGetNormal() {
-		fail("Not yet implemented");
+		
 	}
 
 }

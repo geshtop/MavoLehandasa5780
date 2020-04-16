@@ -8,6 +8,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
+ * Unit tests for geometries.Cylinder class 
  * @author Tamar Sebbag
  *
  */
@@ -18,7 +19,7 @@ public class CylinderTests {
 	 */
 	@Test
 	public void testGetNormal() {
-		fail("Not yet implemented");
+		
 	}
 
 }
