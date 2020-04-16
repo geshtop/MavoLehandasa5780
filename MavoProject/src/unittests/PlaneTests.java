@@ -8,7 +8,8 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- * @author Tamar Sebbag
+ * Unit tests for geometries.Plane class
+ * @author Owner
  *
  */
 public class PlaneTests {
@@ -18,7 +19,7 @@ public class PlaneTests {
 	 */
 	@Test
 	public void testGetNormalPoint3D() {
-		fail("Not yet implemented");
+			
 	}
 
 }
