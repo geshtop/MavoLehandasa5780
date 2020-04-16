@@ -15,7 +15,9 @@ public class Plane implements Geometry {
 	//**************************************************************************//
 	public Plane(Point3D point3d, Point3D point3d2, Point3D point3d3) {
 		this._p = point3d;
-		//TODO
+		Vector v1 = point3d2.subtract(point3d);
+		Vector v2 = point3d3.subtract(point3d);
+		this._normal = v1.crossProduct(v2).normalized();
 
 	}
 	/**
@@ -44,8 +46,7 @@ public class Plane implements Geometry {
 
 	@Override
 	public Vector getNormal(Point3D point) {
-		// TODO Auto-generated method stub
-		return null;
+		return _normal;
 	}
 
 	
