@@ -22,7 +22,14 @@ public class VectorTests {
 	 */
 	@Test
 	public void testSubtract() {
-		fail("Not yet implemented");
+		Vector v1 = new Vector(1, 0, 3);
+        Vector v2 = new Vector(-1,4,2);
+        
+        Vector result = v1.subtract(v2);
+        Vector expectedResult = new Vector(2,-4,1);
+        assertEquals("testSubtract() wrong result substract",result, expectedResult);
+
+		
 	}
 
 	/**
@@ -30,7 +37,12 @@ public class VectorTests {
 	 */
 	@Test
 	public void testAdd() {
-		fail("Not yet implemented");
+		Vector v1 = new Vector(1, 0, 3);
+        Vector v2 = new Vector(-1,4,2);
+        
+        Vector result = v1.add(v2);
+        Vector expectedResult = new Vector(0,4,5);
+        assertEquals("testAdd() wrong result add",result, expectedResult);
 	}
 
 	/**
@@ -38,7 +50,12 @@ public class VectorTests {
 	 */
 	@Test
 	public void testScale() {
-		fail("Not yet implemented");
+		Vector v1 = new Vector(1, 0, 3);
+       int scale = 8;
+        
+        Vector result = v1.scale(scale);
+        Vector expectedResult = new Vector(8,0,24);
+        assertEquals("testScale() wrong result scale",result, expectedResult);
 	}
 
 	/**
