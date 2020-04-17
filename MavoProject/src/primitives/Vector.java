@@ -58,7 +58,7 @@ public class Vector {
 	public Vector	add (Vector other) {
 		return new Vector(this._head.add(other));
 	}
-	public Vector	scale (int scalar) {
+	public Vector	scale (double scalar) {
 		double x = _head.get_x().get() * scalar;
 		double y = _head.get_y().get() * scalar;
 		double z = _head.get_z().get() * scalar;

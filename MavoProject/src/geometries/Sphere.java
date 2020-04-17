@@ -11,15 +11,16 @@ public class Sphere extends RadialGeometry {
 	//**************************************************************************//
 	//***********************************CTOR***********************************//
 	//**************************************************************************//
-	Sphere(double radius, Point3D center) {
+	public Sphere(double radius, Point3D center) {
 		super(radius);
 		this._center = center;
 	}
 	
 	@Override
 	public Vector getNormal(Point3D point) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Vector v1 = new Vector( point.subtract(_center));
+		return v1.normalized();
 	}
 	//**************************************************************************//
 	//*******************************GETTER SETTER******************************//
