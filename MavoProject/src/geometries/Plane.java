@@ -3,6 +3,7 @@ package geometries;
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
+import java.util.Arrays;
 import java.util.List;
 
 import primitives.Point3D;
@@ -60,20 +61,24 @@ public class Plane implements Geometry {
 	}
 	@Override
 	public List<Point3D> findIntersections(Ray ray) {
-		   Vector p0Q;
-	        try {
-	            p0Q = _p.subtract(ray.get_POO());
-	        } catch (IllegalArgumentException e) {
-	            return null; // ray starts from point Q - no intersections
-	        }
-
-	        double nv = _normal.dotProduct(ray.get_direction());
-	        if (isZero(nv)) // ray is parallel to the plane - no intersections
+		 Point3D p0 = ray.get_POO();
+	        Vector v = ray.get_direction();
+	        double vn = alignZero(this._normal.dotProduct(v));
+	        // if the ray is ray in parallel to the plane (orthogonal to the normal) return
+	        // null
+	        if (vn == 0)
 	            return null;
-
-	        double t = alignZero(_normal.dotProduct(p0Q) / nv);
-
-	        return t <= 0 ? null : List.of(ray.getPoint(t));
+	        Vector pp0 = null;
+	        try {
+	            pp0 = this._p.subtract(p0);
+	        } catch (Exception e) {
+	            // if the ray's base is equal to the origin point of the plane return null
+	            return null;
+	        }
+	        double t = alignZero(this._normal.dotProduct(pp0) / vn);
+	        // if the plane is behind the ray, or the ray's base is on the plane return null
+	        return (t <= 0) ? null : Arrays.asList(new Point3D( p0.add(v.scale(t)))); // return the intersection
+	 
 	}
 
 	

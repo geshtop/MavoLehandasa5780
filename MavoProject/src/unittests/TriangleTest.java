@@ -20,7 +20,7 @@ public class TriangleTest {
 	static Triangle triangle = new Triangle(p1, p2, p3);
 
 	/**
-	 * test Method for {@link geometries.Polygon#getNormal (geomtries.Polygon)}
+	 * test Method for {@link geometries.Polygon#getNormal (geomtries.Triangle)}
 	 */
 	@Test
 	public void testGetNormal() {
