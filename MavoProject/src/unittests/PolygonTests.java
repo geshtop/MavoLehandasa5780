@@ -9,6 +9,8 @@ import org.junit.Test;
 
 import geometries.*;
 import primitives.*;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Testing Polygons
@@ -17,6 +19,7 @@ import primitives.*;
  */
 public class PolygonTests {
 
+	
     /**
      * Test method for
      * {@link geometries.Polygon#Polygon(primitives.Point3D, primitives.Point3D, primitives.Point3D, primitives.Point3D)}.
@@ -91,5 +94,31 @@ public class PolygonTests {
         double sqrt3 = Math.sqrt(1d / 3);
         assertEquals("Bad normal to trinagle", new Vector(sqrt3, sqrt3, sqrt3), pl.getNormal(new Point3D(0, 0, 1)));
     }
+    
+    @Test
+	public void testFindIntersections() {
+		Point3D p1 = new Point3D(0, 0, 0);
+		Point3D p2 = new Point3D(1, 0, 0);
+		Point3D p3 = new Point3D(1, 1, 0);
+		Point3D p4 = new Point3D(0, 1, 0);
+		Polygon square = new Polygon(p1, p2, p3, p4);
+		Ray ray = new Ray(new Point3D(0.25, 0.25, -1), new Vector(0, 0, 1));
+		List<Point3D> intersections = Arrays.asList(new Point3D(  new Point3D(0.25, 0.25, 0)));
+		assertEquals("Polygon findIntersection error ", intersections, square.findIntersections(ray)); // inside square
+		ray = new Ray(new Point3D(-1, -1, -1), new Vector(0, 0, 1));
+		assertEquals("Polygon findIntersection error ", null, square.findIntersections(ray)); // outside square
+		p1 = new Point3D(-2, 0, 0);
+		p2 = new Point3D(-1, 2, 0);
+		p3 = new Point3D(1, 2, 0);
+		p4 = new Point3D(2, 0, 0);
+		Point3D p5 = new Point3D(0, -2, 0);
+		Polygon pentagon = new Polygon(p1, p2, p3, p4, p5);
+		ray = new Ray(new Point3D(0, 0, -1), new Vector(0, 0, 1));
+		intersections = Arrays.asList(new Point3D( new Point3D(0, 0, 0)));
+		assertEquals("Polygon findIntersection error ", intersections, pentagon.findIntersections(ray)); // inside
+		// pentagon
+		ray = new Ray(new Point3D(-3, 3, -1), new Vector(0, 0, 1));
+		assertEquals("Polygon findIntersection error ", null, pentagon.findIntersections(ray)); // outside pentagon
+	}
 
 }

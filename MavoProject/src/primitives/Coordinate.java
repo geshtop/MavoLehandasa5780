@@ -8,7 +8,7 @@ import static primitives.Util.*;
  * 
  * @author Dan Zilberstein
  */
-public final class Coordinate {
+public final class Coordinate /* implements  Comparable<Coordinate> */{
     /**
      * Coordinate value, intentionally "package-friendly" due to performance
      * constraints
@@ -64,9 +64,17 @@ public final class Coordinate {
         if (!(obj instanceof Coordinate)) return false;   
         return isZero(_coord - ((Coordinate)obj)._coord);
     }
+    
+
 
     @Override
     public String toString() {
         return "" + _coord;
     }
+/*
+	@Override
+	public int compareTo(Coordinate o) {
+		 return this.equals(o)?0:-1;
+		
+	}*/
 }

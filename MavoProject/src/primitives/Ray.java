@@ -1,5 +1,7 @@
 package primitives;
 
+import static primitives.Util.isZero;
+
 public class Ray {
 //**************************************************************************//
 //********************************PRIVATE***********************************//
@@ -25,6 +27,16 @@ public Point3D get_POO() {
 public Vector get_direction() {
 	return _direction;
 }
+
+/**
+ * 
+ * @param length
+ * @return
+ */
+public Point3D getPoint(double length) {
+       return isZero(length ) ? _POO : _POO.add(_direction.scale(length));
+}
+
 @Override
 public boolean equals(Object obj) {
    if (this == obj) return true;

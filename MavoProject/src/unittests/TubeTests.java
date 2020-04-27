@@ -17,21 +17,20 @@ import primitives.*;
  */
 public class TubeTests {
 
-	/**
-	 * Test method for {@link geometries.Tube#getNormal(primitives.Point3D)}.
-	 */
-	@Test
-	public void testGetNormal() {
-		Point3D p = new Point3D(3,3,3);
-		Vector v = new Vector(1,1,1);
-		Ray ray = new Ray(p,v);
-		Tube tube = new Tube(5, ray);
-		Vector n = tube.getNormal(new Point3D(5,4,3));
-		//System.out.println(n);
-		Vector expectedNormal = new Vector(-0.2672612419124244, -0.5345224838248488, -0.8017837257372732);
+    public static Point3D basePoint = new Point3D(0, 0, 0);
+    public static Vector vec = new Vector(0, 1, 0);
+    public static Ray asix = new Ray(basePoint, vec);
 
-
-		assertEquals("Bad normal to tube",n,expectedNormal);
-	}
+    /**
+     * test Method for {@link geometries.Tube#getNormal (geomtries.Tube)}
+     */
+    @Test
+    public void testGetNormal() {
+        // Test of normal on the tube
+        Tube tube = new Tube(asix, 1);
+        Point3D p = new Point3D(1, 2, 0);
+        Vector actual = new Vector(1, 0, 0);
+        assertEquals("Normal function error", tube.getNormal(p), actual);
+    }
 
 }
