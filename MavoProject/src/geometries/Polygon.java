@@ -82,7 +82,7 @@ public class Polygon implements Geometry {
 
     @Override
     public Vector getNormal(Point3D point) {
-        return _plane.getNormal();
+        return _plane.getNormal(point);
     }
 
 	@Override

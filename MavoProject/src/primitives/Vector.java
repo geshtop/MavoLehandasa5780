@@ -45,6 +45,9 @@ public class Vector {
 	//*******************************GETTER SETTER******************************//
 	//**************************************************************************//
 	
+	public Vector(Point3D p1, Point3D p2) {
+		 this(p1.subtract(p2));
+	}
 	public Point3D get_head() {
 		return _head;
 	}

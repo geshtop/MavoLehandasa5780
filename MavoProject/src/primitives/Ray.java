@@ -12,21 +12,24 @@ public class Ray {
 //***********************************CTOR***********************************//
 //**************************************************************************//
  public Ray(Point3D POO, Vector direction) {
-		_POO = POO;
-		_direction = direction;
+		_POO =  new Point3D(POO);
+		_direction = new Vector(direction).normalized();
 	}
- 
+
 //**************************************************************************//
 //*******************************GETTER SETTER******************************//
 //**************************************************************************//
 
 public Point3D get_POO() {
-	return _POO;
+	 return new Point3D(_POO);
 }
 
 public Vector get_direction() {
-	return _direction;
+	return new Vector(_direction);
 }
+
+
+
 
 /**
  * 
@@ -36,20 +39,21 @@ public Vector get_direction() {
 public Point3D getPoint(double length) {
        return isZero(length ) ? _POO : _POO.add(_direction.scale(length));
 }
-
 @Override
 public boolean equals(Object obj) {
-   if (this == obj) return true;
-   if (obj == null) return false;
-   if (!(obj instanceof Ray)) return false;
-   Ray oth = (Ray)obj;
-   return _POO.equals(oth._POO) && _direction.equals(oth._direction);
+    if (obj == null || !(obj instanceof Ray))
+        return false;
+    if (this == obj)
+        return true;
+    Ray other = (Ray)obj;
+    return (_POO.equals(other._POO) &&
+            _direction.equals(other._direction));
 }
 
 
 @Override
  public String toString() {
-     return "" + _POO.toString() + _direction.toString();
+	return String.format ("point: " + _POO + ", direction: " + _direction);
  }
 	
 }

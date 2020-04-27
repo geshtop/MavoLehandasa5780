@@ -3,11 +3,13 @@ package geometries;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
+import static primitives.Util.alignZero;
 
 public class Sphere extends RadialGeometry {
 	//**************************************************************************//
@@ -42,42 +44,45 @@ public class Sphere extends RadialGeometry {
 	@Override
 	public List<Point3D> findIntersections(Ray ray) {
 		
-		  List<Point3D> Intersections = new ArrayList<Point3D>();
-	        Point3D basePoint = ray.get_POO();// Getting base point of ray.
+		
+		 Point3D p0 = ray.get_POO();// Getting base point of ray.
 	        Vector v = ray.get_direction();// Getting base point.
-	        // case such that p0 and O are the same point and cause u to be an zero vector
-	        // therefore this if statements avoid that.
-	        if (basePoint.equals(_center)) {
-	            Point3D p = basePoint.add(v.scale(this._radius));
-	            Intersections.add(p);
-	            return Intersections;
+	        Vector u;
+	        try {
+	            u = _center.subtract(p0); // O - P0
+	        } catch (Exception e) {
+	            // case such that p0 and O are the same point and cause u to be an zero vector
+	            // therefore this if statements avoid that.
+	            return Arrays.asList(new Point3D( p0.add(v.scale(this._radius))));
 	        }
-	        Vector u = _center.subtract(basePoint); // O - P0
-	        double tm = v.dotProduct(u); //variable tm is equal to v dot u
-	        double d = Math.sqrt(u.lengthSquared() - tm * tm); // distance from the ray is equal to  (|u|^2 - tm^2)^(0.5)
-	        if (d > _radius)
+	        double tm = alignZero(v.dotProduct(u)); // variable tm is equal to v dot u
+	        double d = alignZero(Math.sqrt(u.lengthSquared() - tm * tm)); // distance from the ray is equal to (|u|^2 -
+	        // tm^2)^(0.5)
+	        if (alignZero(d - _radius) > 0)
 	            return null;
-	        double th = Math.sqrt(_radius * _radius - d * d);
-	        double t1 = tm + th; //calculate t1 with the equation t1 = tm + th
-	        if (t1 > 0) {
+	        double th = alignZero(Math.sqrt(_radius * _radius - d * d));
+	        if (th == 0)
+	            return null;
+	        double t1 = alignZero(tm + th); // calculate t1 with the equation t1 = tm + th
+	        double t2 = alignZero(tm - th); // //calculate t1 with the equation t1 = tm - th.
+	        if (t1 > 0 || t2 > 0) {
+	            List<Point3D> intersections = new ArrayList<>();
 	            // find point with the equation : P = p0 + t1 * v
-	            Point3D p = basePoint.add(v.scale(t1));
-	            Intersections.add(p);
-	            if (th == 0) {
-	                return Intersections;
-	            }
+	            if (t1 > 0)
+	                intersections.add(new Point3D( p0.add(v.scale(t1))));
+	            if (t2 > 0)
+	                intersections.add(new Point3D( p0.add(v.scale(t2))));
+	            return intersections;
 	        }
-	        double t2 = tm - th; // //calculate t1 with the equation t1 = tm - th.
-	        if (t2 > 0) {
-	            // find point with the equation : P = p0 + t2 * v
-	            Point3D p = basePoint.add(v.scale(t2));
-	            Intersections.add(p);
-	        }
-	        if (t1 > 0 || t2 > 0){
-	            return Intersections;}
-	        return null;//other cases which distance from ray is not bigger than radius but there is no intersection.
-	  
-	}
+	        return null;
+		
+		
+		
+		
+		
+		
+		
+		}
 
 	
 

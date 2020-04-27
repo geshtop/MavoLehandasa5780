@@ -17,6 +17,15 @@ public class Cylinder extends Tube {
 	//**************************************************************************//
 	//***********************************CTOR***********************************//
 	//**************************************************************************//
+	// ***************** Constructors ********************** //
+		/**
+		 * Constructs a cylinder with radius, height and axis ray
+		 *
+		 * @param double _radius, radius of the cylinder
+		 * @param double _height, height of the cylinder
+		 * @param Ray    _axis, axis of the cylinder
+		 * @throws new IllegalException when radius is smaller than zero
+		 */
 	public Cylinder(double _radius, double _height, Ray _axis) {
 		super(_axis, _radius);
 		if (_height > 0)
@@ -56,10 +65,6 @@ public class Cylinder extends Tube {
 
 
 
-	@Override
-	public List<Point3D> findIntersections(Ray ray) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 }

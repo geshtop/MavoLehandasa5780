@@ -19,11 +19,15 @@ public class Plane implements Geometry {
 	//**************************************************************************//
 	//***********************************CTOR***********************************//
 	//**************************************************************************//
-	public Plane(Point3D point3d, Point3D point3d2, Point3D point3d3) {
-		this._p = point3d;
-		Vector v1 = point3d2.subtract(point3d);
-		Vector v2 = point3d3.subtract(point3d);
-		this._normal = v1.crossProduct(v2).normalized();
+		public Plane(Point3D p1, Point3D p2, Point3D p3) {
+	        _p = new Point3D(p1);
+
+	        Vector U = new Vector(p1, p2);
+	        Vector V = new Vector(p1, p3);
+	        Vector N = U.crossProduct(V);
+	        N.normalize();
+
+	        _normal = N;
 
 	}
 	/**
