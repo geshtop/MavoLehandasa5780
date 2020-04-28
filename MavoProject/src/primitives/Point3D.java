@@ -1,10 +1,7 @@
 package primitives;
 
 public class Point3D {
-	//**************************************************************************//
-	//********************************PRIVATE***********************************//
-	//**************************************************************************//
-
+	
 	
 	private Coordinate _x;
 	private Coordinate _y;
@@ -13,9 +10,7 @@ public class Point3D {
 
 	public static Point3D ZERO = new Point3D(0,0,0);
 	
-	//**************************************************************************//
-	//***********************************CTOR***********************************//
-	//**************************************************************************//
+
 	
 	/**
 	 * this ctor get 3 double parameter and create the point
@@ -51,25 +46,39 @@ public class Point3D {
 		_z =other._z;
 	}
 	
-	//**************************************************************************//
-	//*******************************GETTER SETTER******************************//
-	//**************************************************************************//
-	
+    /**
+     * Getter of coordinate x of point.
+     *
+     * @return coordinate x.
+     */
 	public Coordinate get_x() {
 		return _x;
 	}
 
-	
+	   /**
+     * Getter of coordinate y of point.
+     *
+     * @return coordinate y.
+     */
 	public Coordinate get_y() {
 		return _y;
 	}
 
-	
+    /**
+     * Getter of coordinate z of point.
+     *
+     * @return coordinate z.
+     */
 	public Coordinate get_z() {
 		return _z;
 	}
 	
-	//methods
+    /**
+     * 3D point subtraction operation by coordinates .
+     *
+     * @param other initial 3D space point.
+     * @return the vector which ends in the point and begins in other .
+     */
 	public Vector subtract(Point3D point3d) {
 		double x = this._x.get() - point3d._x.get();
 		double y = this._y.get() - point3d._y.get();
@@ -77,7 +86,12 @@ public class Point3D {
 
 		return new Vector(new Point3D(x,y,z));
 	}
-	
+	 /**
+     * 3D point addition operation by coordinates .
+     *
+     * @param other Vector
+     * @return the head point .
+     */
 	public Point3D add(Vector vector) {
 		double x = this._x.add(vector._head._x);
 		double y = this._y.add(vector._head._y);
@@ -86,14 +100,24 @@ public class Point3D {
 
 	}
 	
-	
-
+	 /**
+     * Calculates the squared distance between the points
+     *
+     * @param other 3D point.
+     * @return the squared distance
+     */
 	public double 	distanceSquared (Point3D point3d) {
 		double x = point3d._x.subtract(this._x);
 		double y = point3d._y.subtract(this._y);
 		double z = point3d._z.subtract(this._z);
 		return (x*x + y*y + z*z);
 	}
+    /**
+     * Calculates the actual distance between points.
+     *
+     * @param other 3D point.
+     * @return the distance
+     */
 	public double 	distance (Point3D point3d) {
 		return Math.sqrt(distanceSquared(point3d));
 	}

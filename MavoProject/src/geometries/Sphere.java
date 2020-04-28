@@ -12,13 +12,9 @@ import primitives.Vector;
 import static primitives.Util.alignZero;
 
 public class Sphere extends RadialGeometry {
-	//**************************************************************************//
-	//********************************PRIVATE***********************************//
-	//**************************************************************************//
+	
 	private Point3D _center;
-	//**************************************************************************//
-	//***********************************CTOR***********************************//
-	//**************************************************************************//
+
 	 /**
      * constructs a sphere with a radius and center point
      *
@@ -30,17 +26,21 @@ public class Sphere extends RadialGeometry {
         this._center = _center;
     }
 	
+
+    /**
+     * Gets the center of the Sphere
+     *
+     * @return Point3D  center
+     */
+	public Point3D get_center() {
+		return _center;
+	}
+	
+	
 	@Override
 	public Vector getNormal(Point3D p) {
         return p.subtract(_center).normalized();
     }
-	//**************************************************************************//
-	//*******************************GETTER SETTER******************************//
-	//**************************************************************************//
-	public Point3D get_center() {
-		return _center;
-	}
-
 	@Override
 	public List<Point3D> findIntersections(Ray ray) {
 		

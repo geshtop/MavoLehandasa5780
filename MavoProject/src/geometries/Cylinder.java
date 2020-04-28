@@ -3,20 +3,16 @@ package geometries;
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
-import java.util.List;
+
 
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
 public class Cylinder extends Tube {
-	//**************************************************************************//
-	//********************************PRIVATE***********************************//
-	//**************************************************************************//
+	
 	private double _height;
-	//**************************************************************************//
-	//***********************************CTOR***********************************//
-	//**************************************************************************//
+	
 	// ***************** Constructors ********************** //
 		/**
 		 * Constructs a cylinder with radius, height and axis ray
@@ -35,9 +31,11 @@ public class Cylinder extends Tube {
 		}
 	}
 
-	//**************************************************************************//
-	//*******************************GETTER SETTER******************************//
-	//**************************************************************************//
+
+	/**
+	 * getter of height
+	 * @return double _height 
+	 */
 	public double get_height() {
 		return _height;
 	}

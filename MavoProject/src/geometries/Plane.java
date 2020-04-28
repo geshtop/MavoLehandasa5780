@@ -1,7 +1,7 @@
 package geometries;
 
 import static primitives.Util.alignZero;
-import static primitives.Util.isZero;
+
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,15 +11,16 @@ import primitives.Ray;
 import primitives.Vector;
 
 public class Plane implements Geometry {
-	//**************************************************************************//
-	//********************************PRIVATE***********************************//
-	//**************************************************************************//
 	private Point3D _p;
 	private Vector _normal;
 	
-	//**************************************************************************//
-	//***********************************CTOR***********************************//
-	//**************************************************************************//
+	 /**
+     * Constructs a plane using three points in the space
+     *
+     * @param p1 is first point
+     * @param p2 is second point
+     * @param p3 is third point
+     */
 		public Plane(Point3D p1, Point3D p2, Point3D p3) {
 	        _p = new Point3D(p1);
 
@@ -31,25 +32,28 @@ public class Plane implements Geometry {
 	        _normal = N;
 
 	}
-	/**
-	 * 
-	 * @param p
-	 * @param normal
-	 */
+	    // ***************** Constructors ********************** //
+
+	    /**
+	     * Constructs a plane with a point and normal vector
+	     *
+	     * @param _p,      the base point of the normal
+	     * @param _normal, the normal vector to the plane
+	     */
 	public Plane(Point3D p, Vector normal) {
 		this._p = p;
 		this._normal = normal.normalized();
 
 	}
 
-	
-	//**************************************************************************//
-	//*******************************GETTER SETTER******************************//
-	//**************************************************************************//
+	//because polygon
 	public Vector getNormal() {
 		return _normal;
 	}
-
+	/**
+	 * getter of point
+	 * @return Point3D' _p 
+	 */
 	public Point3D get_p() {
 		return _p;
 	}

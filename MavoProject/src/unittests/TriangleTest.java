@@ -24,8 +24,9 @@ public class TriangleTest {
 	 */
 	@Test
 	public void testGetNormal() {
-		Vector normal = new Vector(0, 0, 1);
-		//assertEquals("Get normal function error", normal, triangle.getNormal(new Point3D(1, 1, 0)));
+		Vector normal = new Vector(0, 0, -1);
+		assertEquals("Get normal function error", normal, triangle.getNormal(new Point3D(1, 1, 0)));
+
 	}
 
 	/**

@@ -11,9 +11,10 @@ import java.util.List;
  */
 public interface Intersectable {
 	/**
-	 * פונרציה המקבלת קרן ומחזירה נקודות חיתוך עם האובייקט
+	 * finds intersections of the ray with the Geometry
+	 *
 	 * @param ray
-	 * @return נקודות חיתוך
+	 * @return intersection point
 	 */
 	List<Point3D> findIntersections(Ray ray);
 

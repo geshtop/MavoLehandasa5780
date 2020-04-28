@@ -44,13 +44,24 @@ public final class Coordinate /* implements  Comparable<Coordinate> */{
     }
 
    
-    
+	 /**
+     * Coordinate addition operation by Coordinate .
+     *
+     * @param other Coordinate
+     * @return double .
+     */
     public double add(Coordinate other) {
 		
 		return this._coord +other.get();
 
 	}
     
+    /**
+     * Coordinate subtraction operation by Coordinate .
+     *
+     * @param other initial Coordinate.
+     * @return the double .
+     */
     public double subtract (Coordinate other) {
 		return this._coord -other.get();
 
@@ -71,10 +82,5 @@ public final class Coordinate /* implements  Comparable<Coordinate> */{
     public String toString() {
         return "" + _coord;
     }
-/*
-	@Override
-	public int compareTo(Coordinate o) {
-		 return this.equals(o)?0:-1;
-		
-	}*/
+
 }

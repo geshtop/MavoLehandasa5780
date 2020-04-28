@@ -7,14 +7,10 @@ import primitives.Ray;
 import primitives.Vector;
 
 public class Tube extends RadialGeometry {
-	//**************************************************************************//
-	//********************************PRIVATE***********************************//
-	//**************************************************************************//
+
 
 	 protected final Ray _axisRay;
-	//**************************************************************************//
-	//***********************************CTOR***********************************//
-	//**************************************************************************//
+
 		/**
 		 * constructs a tube from axis and radius
 		 *
@@ -26,6 +22,15 @@ public class Tube extends RadialGeometry {
 			_axisRay = axis;
 		}
 
+		 /**
+	     * Gets the axis of the tube
+	     *
+	     * @return Ray axis 
+	     */
+		public Ray get_axisRay() {
+			return _axisRay;
+		}
+		
 	@Override
 	public Vector getNormal(Point3D point) {
 		Vector v = _axisRay.get_direction();
@@ -38,9 +43,7 @@ public class Tube extends RadialGeometry {
 		
 	}
 
-	public Ray get_axisRay() {
-		return _axisRay;
-	}
+
 
 	@Override
 	public List<Point3D> findIntersections(Ray ray) {
