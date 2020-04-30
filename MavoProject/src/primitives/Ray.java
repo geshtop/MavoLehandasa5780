@@ -18,7 +18,14 @@ public class Ray {
 		_POO =  new Point3D(POO);
 		_direction = new Vector(direction).normalized();
 	}
-
+ /**
+  * Copy constructor for a deep copy of an Ray object.
+  * @param other the object that being copied
+  */
+ public Ray(Ray other) {
+     this._POO = new Point3D(other._POO);
+     this._direction = other._direction.normalized();
+ }
 
  /**
   * Getter of initial point

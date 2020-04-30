@@ -16,6 +16,15 @@ import primitives.*;
  *
  */
 public class VectorTests {
+    /**
+     * Test succeed when IllegalArgumentException is thrown and fail when zero
+     * vector is successfully created.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testVectorZero() {
+        new Vector(Point3D.ZERO);
+    }
+
 
 	/**
 	 * Test method for {@link primitives.Vector#subtract(primitives.Vector)}.

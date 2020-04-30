@@ -42,7 +42,7 @@ public class Vector {
 	 * @param head point of the vector
 	 * @throws newIllegalException when head is (0,0,0)
 	 */
-	Vector(Point3D head){
+	public Vector(Point3D head){
 		if(head.equals(Point3D.ZERO))
 			throw new  IllegalArgumentException("The vector cannot be zero");
 		this._head = head;

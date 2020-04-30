@@ -86,6 +86,18 @@ public class Point3D {
 
 		return new Vector(new Point3D(x,y,z));
 	}
+    /**
+     * 3D point subtraction operation by coordinates .
+     *
+     * @param other initial 3D space point.
+     * @return the vector which ends in the point and begins in other .
+     */
+	public Point3D subtract(Vector v) {
+        return new Point3D(this._x._coord - v._head._x._coord,
+                this._y._coord - v._head._y._coord,
+                this._z._coord - v._head._z._coord);
+    }
+
 	 /**
      * 3D point addition operation by coordinates .
      *
