@@ -122,3 +122,4 @@ public class Render {
 		image.writeToImage();
 	}
 }
+
