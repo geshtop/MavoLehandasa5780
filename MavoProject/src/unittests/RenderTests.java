@@ -26,11 +26,18 @@ public class RenderTests {
         scene.setCamera(new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0)));
         scene.setDistance(100);
         scene.setBackground(new Color(75, 127, 90));
-        scene.setAmbientLight(new AmbientLight(new Color(255, 191, 191), 1));
+        scene.setAmbient(new AmbientLight(new Color(255, 191, 191), 1));
+        //כאן מוסיפים את הכדור
+        scene.addIntersectable(new Sphere(50, new Point3D(0, 0, 100)));
+        //Polygon pol  = new Polygon(new Point3D(0, 0, 1), new Point3D(1, 0, 0),
+        //        new Point3D(0, 1, 0), new Point3D(-1, 1, 1));
+        
+        //scene.addIntersectable(pol);
 
-        scene.addGeometries(new Sphere(50, new Point3D(0, 0, 100)));
 
-        scene.addGeometries(
+        //כאן מוסיפים את 4 משולשים
+
+        scene.addIntersectable(
                 new Triangle(new Point3D(100, 0, 100), new Point3D(0, 100, 100), new Point3D(100, 100, 100)),
                 new Triangle(new Point3D(100, 0, 100), new Point3D(0, -100, 100), new Point3D(100, -100, 100)),
                 new Triangle(new Point3D(-100, 0, 100), new Point3D(0, 100, 100), new Point3D(-100, 100, 100)),
@@ -40,7 +47,7 @@ public class RenderTests {
         Render render = new Render(imageWriter, scene);
 
         render.renderImage();
-        render.printGrid(50, java.awt.Color.YELLOW);
+        render.printGrid(50, new primitives.Color (java.awt.Color.YELLOW));
         render.writeToImage();
     }
 
