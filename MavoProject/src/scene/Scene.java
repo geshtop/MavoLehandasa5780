@@ -1,9 +1,8 @@
 package scene;
 
 import elements.*;
-import geometries.Geometries;
 import primitives.*;
-
+import geometries.*;
 public class Scene {
 
 	    String _name;
@@ -127,4 +126,14 @@ public class Scene {
 	    // ***************** Operations ******************** //
 
 	   
+	    /**
+	     * adds shapes to the 3D model
+	     *
+	     * @param shapes
+	     */
+	    public void addIntersectable(Intersectable... shapes) {
+	    	if (_geometries == null)
+	    		_geometries = new Geometries();
+	    	_geometries.add(shapes);
+	    }
 }
