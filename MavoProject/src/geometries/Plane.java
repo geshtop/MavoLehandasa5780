@@ -10,7 +10,7 @@ import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
-public class Plane implements Geometry {
+public class Plane extends Geometry {
 	private Point3D _p;
 	private Vector _normal;
 	
@@ -64,7 +64,7 @@ public class Plane implements Geometry {
 		return _normal;
 	}
 	@Override
-	public List<Point3D> findIntersections(Ray ray) {
+	public List<GeoPoint> findIntersections(Ray ray) {
 		 Point3D p0 = ray.get_POO();
 	        Vector v = ray.get_direction();
 	        double vn = alignZero(this._normal.dotProduct(v));
@@ -81,7 +81,7 @@ public class Plane implements Geometry {
 	        }
 	        double t = alignZero(this._normal.dotProduct(pp0) / vn);
 	        // if the plane is behind the ray, or the ray's base is on the plane return null
-	        return (t <= 0) ? null : Arrays.asList(new Point3D( p0.add(v.scale(t)))); // return the intersection
+	        return (t <= 0) ? null : Arrays.asList(new GeoPoint(this, p0.add(v.scale(t)))); // return the intersection
 	 
 	}
 

@@ -42,7 +42,7 @@ public class Sphere extends RadialGeometry {
         return p.subtract(_center).normalized();
     }
 	@Override
-	public List<Point3D> findIntersections(Ray ray) {
+	public List<GeoPoint> findIntersections(Ray ray) {
 		
 		
 		 Point3D p0 = ray.get_POO();// Getting base point of ray.
@@ -53,7 +53,7 @@ public class Sphere extends RadialGeometry {
 	        } catch (Exception e) {
 	            // case such that p0 and O are the same point and cause u to be an zero vector
 	            // therefore this if statements avoid that.
-	            return Arrays.asList(new Point3D( p0.add(v.scale(this._radius))));
+	            return Arrays.asList(new GeoPoint(this, p0.add(v.scale(this._radius))));
 	        }
 	        double tm = alignZero(v.dotProduct(u)); // variable tm is equal to v dot u
 	        double d = alignZero(Math.sqrt(u.lengthSquared() - tm * tm)); // distance from the ray is equal to (|u|^2 -
@@ -66,12 +66,12 @@ public class Sphere extends RadialGeometry {
 	        double t1 = alignZero(tm + th); // calculate t1 with the equation t1 = tm + th
 	        double t2 = alignZero(tm - th); // //calculate t1 with the equation t1 = tm - th.
 	        if (t1 > 0 || t2 > 0) {
-	            List<Point3D> intersections = new ArrayList<>();
+	            List<GeoPoint> intersections = new ArrayList<>();
 	            // find point with the equation : P = p0 + t1 * v
 	            if (t1 > 0)
-	                intersections.add(new Point3D( p0.add(v.scale(t1))));
+	                intersections.add(new GeoPoint( this,  p0.add(v.scale(t1))));
 	            if (t2 > 0)
-	                intersections.add(new Point3D( p0.add(v.scale(t2))));
+	                intersections.add(new GeoPoint( this, p0.add(v.scale(t2))));
 	            return intersections;
 	        }
 	        return null;

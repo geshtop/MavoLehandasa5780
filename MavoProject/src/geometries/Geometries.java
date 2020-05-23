@@ -9,7 +9,6 @@ package geometries;
  *
  */
 
-import primitives.Point3D;
 import primitives.Ray;
 
 import java.util.ArrayList;
@@ -19,7 +18,6 @@ import java.util.List;
 public class Geometries implements Intersectable {
 
     private List<Intersectable> _geometries = new ArrayList<>();
-
     /**
 	 * Default constructor constructs the list as an empty ArrayList
 	 */
@@ -69,19 +67,24 @@ public class Geometries implements Intersectable {
 		// TODO Auto-generated method stub
 		return _geometries;
 	}
-    @Override
-    public List<Point3D> findIntersections(Ray ray) {
-        List<Point3D> intersections = null;
 
-        for (Intersectable geo : _geometries) {
-            List<Point3D> tempIntersections = geo.findIntersections(ray);
-            if (tempIntersections != null) {
-                if (intersections == null)
-                    intersections = new ArrayList<>();
-                intersections.addAll(tempIntersections);
-            }
-        }
-        return intersections;
-
-    }
+    
+	/**
+	 * finds intersections of the ray with the geometries that are in the list
+	 *
+	 * @param ray in space.
+	 * @return intersection points
+	 */
+	public List<GeoPoint> findIntersections(Ray ray) {
+		List<GeoPoint> intersections = new ArrayList<>();
+		for (Intersectable shape : _geometries) {
+			List<GeoPoint> ints = shape.findIntersections(ray);
+			if (ints != null)
+				intersections.addAll(ints);
+		}
+		// if no intersections were found, return null
+		if (intersections.size() == 0)
+			return null;
+		return intersections;
+	}
 }

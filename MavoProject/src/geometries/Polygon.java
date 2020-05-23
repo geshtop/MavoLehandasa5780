@@ -1,5 +1,6 @@
 package geometries;
 
+import java.util.Arrays;
 import java.util.List;
 import primitives.*;
 import static primitives.Util.*;
@@ -10,7 +11,7 @@ import static primitives.Util.*;
  * 
  * @author Dan
  */
-public class Polygon implements Geometry {
+public class Polygon extends Geometry {
     /**
      * List of polygon's vertices
      */
@@ -80,35 +81,56 @@ public class Polygon implements Geometry {
         }
     }
 
+    
+    
+    /**
+     * Constructs a polygon from set of points - polygon's vertices and a color. NB: the points
+     * must be in the same plane
+     *
+     * @param emission the color of the polygon
+     * @param points   vertices
+     * @throws IllegalArgumentException if less than 3 points or points are not in
+     *                                  the same plane
+     */
+    public Polygon(Color emission, Point3D... points) {
+        this(points);
+        this._emission = emission;
+       
+    }
+    
     @Override
     public Vector getNormal(Point3D point) {
         return _plane.getNormal(point);
     }
 
 	@Override
-	public List<Point3D> findIntersections(Ray ray) {
-		 List<Point3D> intersections = _plane.findIntersections(ray);
-	        if (intersections == null) return null;
-
-	        Point3D p0 = ray.get_POO();
-	        Vector v = ray.get_direction();
-
-	        Vector v1  = _vertices.get(1).subtract(p0);
-	        Vector v2 = _vertices.get(0).subtract(p0);
-	        double sign = v.dotProduct(v1.crossProduct(v2));
-	        if (isZero(sign))
-	            return null;
-
-	        boolean positive = sign > 0;
-
-	        for (int i = _vertices.size() - 1; i > 0; --i) {
-	            v1 = v2;
-	            v2 = _vertices.get(i).subtract(p0);
-	            sign = alignZero(v.dotProduct(v1.crossProduct(v2)));
-	            if (isZero(sign)) return null;
-	            if (positive != (sign >0)) return null;
-	        }
-
-	        return intersections;
-	}
+    public List<GeoPoint> findIntersections(Ray ray) {
+        List<GeoPoint> intersections = this._plane.findIntersections(ray);
+        if (intersections == null) // if there are no intersections with the plane, or the ray's
+            // base is on the triangle return null
+            return null;
+        Point3D p0 = ray.get_POO();
+        int size = this._vertices.size();
+        Vector[] v = new Vector[size];
+        Vector[] n = new Vector[size];
+        double[] un = new double[size];
+        // vi = pi - p0
+        for (int i = 0; i < size; ++i)
+            v[i] = _vertices.get(i).subtract(p0);
+        // Ni = Vi x Vi+1
+        for (int i = 0; i < size; ++i)
+            n[i] = v[i].crossProduct(v[(i < size - 1) ? i + 1 : 0]).normalize();
+        Vector u = intersections.get(0).getPoint().subtract(p0);
+        // uni = u*Ni
+        for (int i = 0; i < size; ++i)
+            if ((un[i] = alignZero(u.dotProduct(n[i]))) == 0)
+                return null;
+        double sign = un[0];
+        for (int i = 1; i < size; ++i)
+            // if the N1...Nn do not have the same sign, return null
+            if ((sign < 0 && un[i] > 0) || (sign > 0 && un[i] < 0))
+                return null;
+        Point3D intersection = intersections.get(0).point;
+        return Arrays.asList(new GeoPoint(this, intersection));
+    }
 }

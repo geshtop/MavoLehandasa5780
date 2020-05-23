@@ -2,6 +2,7 @@ package renderer;
 
 import java.util.List;
 
+import geometries.Intersectable.GeoPoint;
 import primitives.*;
 import scene.Scene;
 
@@ -45,44 +46,49 @@ public class Render {
 					Ray ray = scene.getCamera().constructRayThroughPixel(nx, ny, //
 							j, i, distance, width, height);
 					//מוצאים את נקודות החיתוך עם הגאומטריות
-					List<Point3D> intersectionPoints = scene.getGeometries().findIntersections(ray);
-
-					Point3D closestPoint = getClosestPoint(intersectionPoints);
-					image.writePixel(j, i, //
-							closestPoint == null ? bg : calcColor(closestPoint).getColor());
+					List<GeoPoint> intersectionPoints = scene.getGeometries().findIntersections(ray);
+					
+					  if (intersectionPoints == null)
+		                    image.writePixel(j, i, scene.getBackground().getColor());
+		                    // else, find the closest intersection to the camera and and paint the pixel
+		                    // with the geometry's color
+		                else {
+		                	GeoPoint closestPoint = getClosestPoint(intersectionPoints);
+		                	image.writePixel(j, i, //
+									closestPoint == null ? bg : calcColor(closestPoint).getColor());
+		                }
+					
+					
+					
 				}
 
 			
 		}
 	}
 	
-	/**
-	 * the function finds the closest intersection point using the getClosestPoint
-	 * that take a intersection list of Point3D and return the closest.
-	 *
-	 * @param ray in space
-	 * @return the closest geometry intersection point to the camera
-	 */
-	private Point3D getClosestPoint(List<Point3D> points) {
-		if (points == null)
-			return null;
-		Point3D p0 = scene.getCamera().getP0();
-		double minValue = Double.POSITIVE_INFINITY;
-		Point3D minPoint = null;
-		try {
-			for (Point3D p : points) {
-				double d0 = p.distance(p0);
-				if (d0 < minValue) {
-					minValue = d0;
-					minPoint = p;
-				}
-			}
-		} catch (Exception e) {
-			
-		}
+	   /**
+     * finds to closest intersection of the ray with geometry
+     *
+     * @param points - the intersection point
+     * @return the closest point
+     */ 	
+    private GeoPoint getClosestPoint(List<GeoPoint> points) {
+        Point3D p0 = scene.getCamera().getP0();
+        double minValue = points.get(0).getPoint().distance(p0);
+        GeoPoint minPoint = points.get(0);
+        for (int i = 0; i < points.size(); ++i) {
+            Point3D p = points.get(i).getPoint();
+            double d0 = p.distance(p0);
+            if (d0 < minValue) {
+                minValue = d0;
+                minPoint.point = p;
+            }
+        }
+        return minPoint;
+    }
 
-		return minPoint;
-	}
+	
+	
 
 	/**
 	 * prints a 2D grid on the rendered picture
@@ -110,8 +116,12 @@ public class Render {
 	 * @param - Point3D in the space (pixel on the view plane)
 	 * @return the color of the point
 	 */
-		private Color calcColor(Point3D point) {
-			return scene.getAmbient().getIntensity();
+		private Color calcColor(GeoPoint point) {
+			Color color = scene.getAmbient().getIntensity();
+	        color = color.add(point.geometry.getEmission());
+	    
+			//return scene.getAmbient().getIntensity();
+			return color;
 		}
 
 
