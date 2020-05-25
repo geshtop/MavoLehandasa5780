@@ -6,6 +6,8 @@ import static primitives.Util.alignZero;
 import java.util.Arrays;
 import java.util.List;
 
+import primitives.Color;
+import primitives.Material;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
@@ -14,15 +16,29 @@ public class Plane extends Geometry {
 	private Point3D _p;
 	private Vector _normal;
 	
-	 /**
+	
+	  // ***************** Constructors ********************** //
+
+    /**
+     * Constructs a plane with a point and normal vector
+     *
+     * @param _p,      the base point of the normal
+     * @param _normal, the normal vector to the plane
+     */
+    public Plane(Point3D p, Vector _normal) {
+    	this._p = p;
+		this._normal = _normal.normalized();
+    }
+
+    /**
      * Constructs a plane using three points in the space
      *
      * @param p1 is first point
      * @param p2 is second point
      * @param p3 is third point
      */
-		public Plane(Point3D p1, Point3D p2, Point3D p3) {
-	        _p = new Point3D(p1);
+    public Plane(Point3D p1, Point3D p2, Point3D p3) {
+    	  _p = new Point3D(p1);
 
 	        Vector U = new Vector(p1, p2);
 	        Vector V = new Vector(p1, p3);
@@ -30,21 +46,77 @@ public class Plane extends Geometry {
 	        N.normalize();
 
 	        _normal = N;
+    }
 
-	}
-	    // ***************** Constructors ********************** //
+    /**
+     * Constructs a plane with a point, normal vector and a color
+     *
+     * @param emission the color of the plane
+     * @param _p,      the base point of the normal
+     * @param _normal, the normal vector to the plane
+     */
+    public Plane(Color emission, Point3D _p, Vector _normal) {
+        this(_p, _normal);
+        this._emission = emission;
+    }
 
-	    /**
-	     * Constructs a plane with a point and normal vector
-	     *
-	     * @param _p,      the base point of the normal
-	     * @param _normal, the normal vector to the plane
-	     */
-	public Plane(Point3D p, Vector normal) {
-		this._p = p;
-		this._normal = normal.normalized();
+    /**
+     * Constructs a plane using three points in the space and a color
+     *
+     * @param emission the color of the plane
+     * @param p1       is first point
+     * @param p2       is second point
+     * @param p3       is third point
+     */
+    public Plane(Color emission, Point3D p1, Point3D p2, Point3D p3) {
+        this(p1, p2, p3);
+        this._emission = emission;
+    }
 
-	}
+    /**
+     * Constructs a plane with a point, normal vector and a color
+     *
+     * @param emission the color of the plane
+     * @param material the material of the plane
+     * @param _p,      the base point of the normal
+     * @param _normal, the normal vector to the plane
+     */
+    public Plane(Color emission, Material material, Point3D _p, Vector _normal) {
+        this(emission, _p, _normal);
+        this.material = material;
+    }
+
+    /**
+     * Constructs a plane using three points in the space and a color
+     *
+     * @param emission the color of the plane
+     * @param material the material of the plane
+     * @param p1       is first point
+     * @param p2       is second point
+     * @param p3       is third point
+     */
+    public Plane(Color emission, Material material, Point3D p1, Point3D p2, Point3D p3) {
+        this(emission, p1, p2, p3);
+        this.material = material;
+    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 
 	//because polygon
 	public Vector getNormal() {

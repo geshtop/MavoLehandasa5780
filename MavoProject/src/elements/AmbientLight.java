@@ -2,9 +2,7 @@ package elements;
 
 import primitives.Color;
 
-public class AmbientLight {
-	 Color intensity;
-
+public class AmbientLight extends Light  {
     /**
      * sets the ambient light of the picture by color and Attenuation coefficient
      *
@@ -12,7 +10,8 @@ public class AmbientLight {
      * @param k - Attenuation coefficient
      */
     public AmbientLight(Color i, double k) {
-        intensity = i.scale(k);
+		super(i.scale(k));
+        //_intensity = i.scale(k);
     }
     
     /**
@@ -20,8 +19,8 @@ public class AmbientLight {
      *
      * @return light intensity
      */
-    public Color getIntensity() {
-        return intensity;
-    }
+   // public Color getIntensity() {
+   //     return _intensity;
+   //}
 
 }

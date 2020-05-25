@@ -2,6 +2,7 @@ package geometries;
 import static primitives.Util.isZero;
 
 import primitives.Color;
+import primitives.Material;
 
 
 /**
@@ -22,6 +23,11 @@ public abstract class RadialGeometry extends Geometry{
     public RadialGeometry(Color emission, double _radius) {
     	  this(_radius);
           this._emission = emission;
+    }
+    public RadialGeometry(Color emission, Material material, double _radius) {
+        this(_radius);
+        this._emission = emission;
+        this.material = material;
     }
     public RadialGeometry(RadialGeometry other){
         this._radius= other._radius;

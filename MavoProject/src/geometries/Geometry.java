@@ -1,8 +1,7 @@
 package geometries;
 
-import primitives.Color;
-import primitives.Point3D;
-import primitives.Vector;
+import primitives.*;
+
 
 public abstract class  Geometry implements Intersectable  {
 	 /**
@@ -13,12 +12,19 @@ public abstract class  Geometry implements Intersectable  {
      * @return normal vector
      */
 	protected Color _emission;
+	protected Material material;
 	
 	public Geometry() {
 		this(Color.BLACK);
 	}
 	public Geometry(Color emission) {
 		this._emission = emission;
+		this.material = new Material(0.0,0.0, 0);
+	}
+	
+	public Geometry(Color emission,  Material _material ) {
+		this._emission = emission;
+		this.material = _material;
 	}
 	
     // ***************** Getters/Setters ********************** //
@@ -30,5 +36,14 @@ public abstract class  Geometry implements Intersectable  {
 	public Color getEmission() {
 	    return _emission;
 	}
+	
+	 /**
+     * getter of the material of the geometry
+     *
+     * @return the material
+     */
+    public Material getMaterial() {
+        return this.material;
+    }
 	public abstract Vector getNormal(Point3D point);
 }

@@ -2,6 +2,7 @@ package renderer;
 
 import java.util.List;
 
+import elements.LightSource;
 import geometries.Intersectable.GeoPoint;
 import primitives.*;
 import scene.Scene;
@@ -116,13 +117,51 @@ public class Render {
 	 * @param - Point3D in the space (pixel on the view plane)
 	 * @return the color of the point
 	 */
-		private Color calcColor(GeoPoint point) {
-			Color color = scene.getAmbient().getIntensity();
-	        color = color.add(point.geometry.getEmission());
-	    
-			//return scene.getAmbient().getIntensity();
-			return color;
-		}
+	
+	private Color calcColor(GeoPoint intersection) {	
+        Color color = scene.getAmbient().getIntensity();	
+        color = color.add(intersection.geometry.getEmission());	
+        Vector v = intersection.point.subtract(scene.getCamera().getP0()).normalize();	
+        Vector n = intersection.geometry.getNormal(intersection.point);	
+        double kd = intersection.geometry.getMaterial().getKd();	
+        double ks = intersection.geometry.getMaterial().getKs();	
+        int nShininess = intersection.geometry.getMaterial().getShininess();	
+        for (LightSource lightSource : scene.getLights()) {	
+            Vector l = lightSource.getL(intersection.point);	
+            double e1 = n.dotProduct(l);	
+            double e2 = n.dotProduct(v);	
+            if ((e1 > 0 && e2 > 0) || (e1 < 0 && e2 < 0)) {	
+                if (unshaded(l, n, intersection)) {	
+                    Color lightIntensity = lightSource.getIntensity(intersection.point);	
+                    color = color.add((calcDiffusive(kd, l, n, lightIntensity)), calcSpecular(ks, l, n, v, nShininess, lightIntensity));	
+                }	
+                }	
+        }	
+        return color;	
+    }
+	 private static final double EPS = 1.0;
+	 private boolean unshaded(Vector l, Vector n, GeoPoint geopoint) {	
+	        Vector lightDirection = l.scale(-1); // from point to light source	
+	        Vector epsVector = n.scale(n.dotProduct(lightDirection) > 0 ? EPS : -EPS);	
+	        Point3D point = geopoint.point.add(epsVector);	
+	        Ray lightRay = new Ray(point, lightDirection);	
+	        List<GeoPoint> intersections = scene.getGeometries().findIntersections(lightRay);	
+	        return intersections == null;	
+	    }	
+
+
+	    public Color calcDiffusive(double kd, Vector l, Vector n, Color lightIntensity) {	
+	        double diffusive = kd * Math.abs(l.dotProduct(n));	
+	        return lightIntensity.scale(diffusive);	
+	    }	
+
+	    public Color calcSpecular(double ks, Vector l, Vector n, Vector v, int shininess, Color lightIntensity) {	
+	        Vector r = l.subtract(n.scale(l.dotProduct(n) * 2)).normalize();	
+	        double temp = v.scale(-1).dotProduct(r);	
+	        if (temp <= 0)	
+	            return new Color(0, 0, 0);	
+	        return lightIntensity.scale(ks * Math.pow(temp, shininess));	
+	    }
 
 
 	/**

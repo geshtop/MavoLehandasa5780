@@ -1,5 +1,8 @@
 package scene;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import elements.*;
 import primitives.*;
 import geometries.*;
@@ -11,6 +14,7 @@ public class Scene {
 	    Geometries _geometries;
 	    Camera _camera;
 	    double _distance;
+	    List<LightSource> _lights = new LinkedList<>();
 	    
 	    /**
 	     * creates an empty scene with a name
@@ -116,6 +120,14 @@ public class Scene {
 	    }
 
 	    /**
+	     * getter of lights in the scene
+	     *
+	     * @return lights
+	     */
+	    public List<LightSource> getLights() {
+	        return _lights;
+	    }
+	    /**
 	     * setter of distance
 	     *
 	     * @param distance
@@ -123,6 +135,7 @@ public class Scene {
 	    public void setDistance(double distance) {
 	        this._distance = distance;
 	    }
+	    
 	    // ***************** Operations ******************** //
 
 	   
@@ -135,5 +148,15 @@ public class Scene {
 	    	if (_geometries == null)
 	    		_geometries = new Geometries();
 	    	_geometries.add(shapes);
+	    }
+	    
+	    /**
+	     * adds lights to the scene
+	     *
+	     * @param lights
+	     */
+	    public void addLight(LightSource... lights) {
+	        for (int i = 0; i < lights.length; ++i)
+	            _lights.add(lights[i]);
 	    }
 }

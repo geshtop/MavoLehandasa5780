@@ -98,6 +98,23 @@ public class Polygon extends Geometry {
        
     }
     
+  
+
+    /**
+     * Constructs a polygon from set of points - polygon's vertices and a color. NB: the points
+     * must be in the same plane
+     *
+     * @param emission the color of the polygon
+     * @param material the material of the polygon
+     * @param points   vertices
+     * @throws IllegalArgumentException if less than 3 points or points are not in
+     *                                  the same plane
+     */
+    public Polygon(Color emission, Material material, Point3D... points) {
+        this(emission, points);
+        this.material = material;
+    }
+    
     @Override
     public Vector getNormal(Point3D point) {
         return _plane.getNormal(point);
