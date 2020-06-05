@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import primitives.*;
 import geometries.*;
+import geometries.Intersectable.GeoPoint;
+
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -39,7 +41,7 @@ public class TriangleTest {
 		 * EP case
 		 */
 		Ray ray = new Ray(new Point3D(2, 2, -1), new Vector(-1, -1, 1));
-		List<Point3D> intersections = Arrays.asList(new Point3D( new Point3D(1, 1, 0)));
+		List<GeoPoint> intersections = Arrays.asList(new GeoPoint(triangle, new Point3D(1, 1, 0)));
 		assertEquals("Find intersection function error", intersections, triangle.findIntersections(ray));// EP ray to a
 		// point
 		// inside
@@ -59,7 +61,7 @@ public class TriangleTest {
 		 * BVA case 1
 		 */
 		ray = new Ray(new Point3D(1, 1, 0), new Vector(1, -1, -1));
-		intersections = Arrays.asList(new Point3D( new Point3D(1, 1, 0)));
+		intersections = Arrays.asList(new GeoPoint(triangle, new Point3D(1, 1, 0)));
 		assertEquals("Find intersection function error", null, triangle.findIntersections(ray));// BVA ray from a point
 		// inside the triangle
 		ray = new Ray(new Point3D(1, -2, 0), new Vector(0, 2, 1));
@@ -78,7 +80,7 @@ public class TriangleTest {
 		 * BVA case 2
 		 */
 		ray = new Ray(new Point3D(1, 1, -1), new Vector(-1, -1, 1));
-		intersections = Arrays.asList(new Point3D( new Point3D(0, 0, 0)));
+		intersections = Arrays.asList(new GeoPoint(triangle, new Point3D(0, 0, 0)));
 		assertEquals("Find intersection function error", null, triangle.findIntersections(ray));// BVA ray to the vertex
 		// of the triangle
 		ray = new Ray(new Point3D(-2, 0, -2), new Vector(1, 0, 3));
@@ -87,7 +89,7 @@ public class TriangleTest {
 		// on the side axis of
 		// the triangle
 		ray = new Ray(new Point3D(2, 0, -1), new Vector(-1, 0, 1));
-		intersections = Arrays.asList(new Point3D( new Point3D(1, 0, 0)));
+		intersections = Arrays.asList(new GeoPoint(triangle, new Point3D(1, 0, 0)));
 		assertEquals("Find intersection function error", null, triangle.findIntersections(ray));// BVA ray to a point on
 		// the side of the
 		// triangle
@@ -95,7 +97,7 @@ public class TriangleTest {
 		 * BVA case 3
 		 */
 		ray = new Ray(new Point3D(0, 0, 0), new Vector(2, 1, 1));
-		intersections = Arrays.asList(new Point3D( new Point3D(0, 0, 0)));
+		intersections = Arrays.asList(new GeoPoint(triangle, new Point3D(0, 0, 0)));
 		assertEquals("Find intersection function error", null, triangle.findIntersections(ray));// BVA ray from the
 		// vertex of the
 		// triangle
@@ -105,7 +107,7 @@ public class TriangleTest {
 		// on the side axis of
 		// the triangle
 		ray = new Ray(new Point3D(0, 2, 0), new Vector(0, 2, 1));
-		intersections = Arrays.asList(new Point3D( new Point3D(0, 2, 0)));
+		intersections = Arrays.asList(new GeoPoint(triangle, new Point3D(0, 2, 0)));
 		assertEquals("Find intersection function error", null, triangle.findIntersections(ray));// BVA ray from a point
 		// on the side of the
 		// triangle

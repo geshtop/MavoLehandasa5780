@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
+import geometries.Intersectable.GeoPoint;
 
 import geometries.*;
 import primitives.*;
@@ -60,7 +61,7 @@ public class PlaneTests {
     public void testFindIntersections() {
         Plane plane = new Plane(p, dir);
         Ray ray = new Ray(new Point3D(0, 0, 1), new Vector(1, 1, -1));
-        List<Point3D> intersections = Arrays.asList(new Point3D( new Point3D(1, 1, 0)));
+        List<GeoPoint> intersections = Arrays.asList(new GeoPoint(plane, new Point3D(1, 1, 0)));
         assertEquals("Find intersections function error", intersections, plane.findIntersections(ray)); // EP ray
         // intersects
         // with the
@@ -81,7 +82,7 @@ public class PlaneTests {
         assertEquals("Find intersections function error", null, plane.findIntersections(ray)); // BVA ray is orthogonal
         // and after p0
         ray = new Ray(new Point3D(0, 0, -1), new Vector(0, 0, 1));
-        intersections = Arrays.asList(new Point3D(new Point3D(0, 0, 0)));
+        intersections = Arrays.asList(new GeoPoint(plane,new Point3D(0, 0, 0)));
         assertEquals("Find intersections function error", intersections, plane.findIntersections(ray)); // BVA ray is
         // orthogonal
         // and before p0
@@ -92,10 +93,9 @@ public class PlaneTests {
         assertEquals("Find intersections function error", null, plane.findIntersections(ray)); // BVA ray begins in the
         // plane
         ray = new Ray(new Point3D(1, 1, 0), new Vector(1, 1, 1));
-        intersections = Arrays.asList(new Point3D(new Point3D(1, 1, 0)));
+        intersections = Arrays.asList(new GeoPoint(plane,new Point3D(1, 1, 0)));
         assertEquals("Find intersections function error", null, plane.findIntersections(ray)); // BVA ray begins in the
         // reference point of
         // the plane
     }
-
 }
