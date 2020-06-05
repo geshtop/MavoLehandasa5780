@@ -131,10 +131,10 @@ public class Render {
             double e1 = n.dotProduct(l);	
             double e2 = n.dotProduct(v);	
             if ((e1 > 0 && e2 > 0) || (e1 < 0 && e2 < 0)) {	
-                //if (unshaded(l, n, intersection)) {	
+               if (unshaded(l, n, intersection)) {	
                     Color lightIntensity = lightSource.getIntensity(intersection.point);	
                     color = color.add((calcDiffusive(kd, l, n, lightIntensity)), calcSpecular(ks, l, n, v, nShininess, lightIntensity));	
-               // }	
+                }	
                 }	
         }	
         return color;	
