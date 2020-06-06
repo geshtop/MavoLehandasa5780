@@ -31,7 +31,7 @@ public class Material {
 		 * @param kr        - reflection coefficient
 		 * @param kt        - transparency coefficient
 		 */
-		public Material(double kd, double ks, int shininess, double kr, double kt) {
+		public Material(double kd, double ks, int shininess, double kt, double kr) {
 			_kD = kd;
 			_kS = ks;
 			_nShininess = shininess;

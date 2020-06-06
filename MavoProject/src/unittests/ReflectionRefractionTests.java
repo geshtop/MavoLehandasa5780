@@ -6,6 +6,8 @@ package unittests;
 import org.junit.Test;
 
 import elements.*;
+import geometries.Plane;
+import geometries.Polygon;
 import geometries.Sphere;
 import geometries.Triangle;
 import primitives.*;
@@ -100,6 +102,63 @@ public class ReflectionRefractionTests {
 				new Point3D(60, -50, 0), new Vector(0, 0, 1), 1, 4E-5, 2E-7));
 
 		ImageWriter imageWriter = new ImageWriter("shadow with transparency", 200, 200, 600, 600);
+		Render render = new Render(imageWriter, scene);
+
+		render.renderImage();
+		render.writeToImage();
+	}
+	
+	
+	/**
+	 * Produce a picture of a two triangles lighted by a spot light with a partially transparent Sphere
+	 *  producing partial shadow
+	 */
+	@Test
+	public void ownTest() {
+		Scene scene = new Scene("Test scene");
+		scene.setCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)));
+		scene.setDistance(1000);
+		scene.setBackground(Color.BLACK);
+		scene.setAmbient(new AmbientLight(new Color(java.awt.Color.WHITE), 0.15));
+
+
+
+		
+		scene.addIntersectable( //
+				new Triangle(Color.BLACK, new Material(0.5, 0.5, 60), //
+						new Point3D(-150, 150, 115), new Point3D(150, 150, 135), new Point3D(75, -75, 150)), //
+				new Triangle(Color.BLACK, new Material(0.5, 0.5, 60), //
+						new Point3D(-150, 150, 115), new Point3D(-70, -70, 140), new Point3D(75, -75, 150)), //
+				new Sphere(new Color(java.awt.Color.BLUE), new Material(0.2, 0.2, 30, 0.6, 0), // )
+						30, new Point3D(6, -5, 5)),
+				// new Plane (new Color(java.awt.Color.RED), new Material(0.2, 0.2, 30, 1,1),point1,point2,point3),
+//				new Polygon(new Color(java.awt.Color.YELLOW), new Material(0.2, 0.2, 30, 0, 0.5)
+//						,new Point3D(0, 0, 50),
+//						new Point3D(50, 0, 0), 
+//						new Point3D(0, 50, 0),
+//		                new Point3D(-50, 50, 50)),
+				new Triangle(new Color(java.awt.Color.RED), new Material(0.5, 0.5, 30), //
+						new Point3D(-70, 40, 0), new Point3D(-40, 70, 0), new Point3D(-68, 68, 4)),
+				new Polygon(new Color(java.awt.Color.GREEN),
+						new Material(0.2, 0.2, 30, 1, 0)
+						,new Point3D(0,40 , 0),
+						new Point3D(20, 60, 0), 
+						new Point3D(40, 40, 0),
+		                new Point3D(35,10, 0),
+		                new Point3D(5,10, 0)
+
+						)
+				
+						
+				);
+
+		scene.addLight(
+//				new SpotLight(new Color(700, 400, 400), //
+//				new Point3D(6, -5, 0), new Vector(0, 0, 1), 1, 4E-5, 2E-7),
+				new SpotLight(new Color(400, 240, 0), //
+						new Point3D(-100, 100, -200), new Vector(1, -1, 3), 1, 1E-5, 1.5E-7));
+
+		ImageWriter imageWriter = new ImageWriter("ownTest", 200, 200, 600, 600);
 		Render render = new Render(imageWriter, scene);
 
 		render.renderImage();
