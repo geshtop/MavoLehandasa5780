@@ -127,6 +127,15 @@ public class Scene {
 	    public List<LightSource> getLights() {
 	        return _lights;
 	    }
+	    
+	    /**
+	     * setter of the lights in the scene
+	     *
+	     * @param _lights
+	     */
+	    public void setLights(List<LightSource> _lights) {
+	        this._lights = _lights;
+	    }
 	    /**
 	     * setter of distance
 	     *

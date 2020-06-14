@@ -6,7 +6,6 @@ package unittests;
 import org.junit.Test;
 
 import elements.*;
-import geometries.Plane;
 import geometries.Polygon;
 import geometries.Sphere;
 import geometries.Triangle;

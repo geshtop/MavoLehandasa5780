@@ -7,6 +7,8 @@ public class Material {
 	int _nShininess;
 	double _kR;
 	double _kT;
+	double _matte;
+	double _diffusion;
 	
 	// ***************** Constructors ********************** //
 
@@ -32,11 +34,28 @@ public class Material {
 		 * @param kt        - transparency coefficient
 		 */
 		public Material(double kd, double ks, int shininess, double kt, double kr) {
+			this(kd, ks, shininess, kt, kr, 0, 0);
+		}
+		
+		/**
+		 * creates a material for a geometry
+		 *
+		 * @param kd        - diffusion attenuation coefficient
+		 * @param ks        - specular attenuation coefficient
+		 * @param shininess - shininess power
+		 * @param kr        - reflection coefficient
+		 * @param kt        - transparency coefficient
+		 * @param matte     - how much the object is materialistic
+		 * @param diff      - how much the object is diffusive
+		 */
+		public Material(double kd, double ks, int shininess, double kt, double kr, double matte, double diff) {
 			_kD = kd;
 			_kS = ks;
 			_nShininess = shininess;
 			_kR = kr;
 			_kT = kt;
+			_matte = matte;
+			_diffusion = diff;
 		}
 
 		/**
@@ -84,6 +103,24 @@ public class Material {
 		 */
 		public double getKt() {
 			return _kT;
+		}
+		
+		/**
+		 * getter of matte variable
+		 * 
+		 * @return material coefficient
+		 */
+		public double getMatte() {
+			return _matte;
+		}
+
+		/**
+		 * getter of diffusion variable
+		 * 
+		 * @return diffusion coefficient
+		 */
+		public double getDiffusion() {
+			return _diffusion;
 		}
 
 }
