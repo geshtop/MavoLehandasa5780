@@ -86,13 +86,13 @@ public class MinitProject1Test {
 		Plane plane2 = new Plane(new Color(0, 30, 30), new Material(0.5, 0.5, 1200), //
 				new Point3D(0, 20, 600), new Vector(0, 0, 1)); // background plane
 
-		Sphere sphere = new Sphere(new Color(0, 0, 20), new Material(0.5, 0.5, 1200, 0, 0.5), //
+		Sphere sphere = new Sphere(new Color(255, 0, 20), new Material(0.5, 0.5, 1200, 0, 0.5), //
 				20, new Point3D(75, -3, 140)); // sphere 1
-		Sphere sphere2 = new Sphere(new Color(0, 0, 20), new Material(0.5, 0.5, 1200,  0, 0.5), //
+		Sphere sphere2 = new Sphere(new Color(255, 0, 20), new Material(0.5, 0.5, 1200,  0, 0.5), //
 				20, new Point3D(25, -18, 140)); // sphere 2
-		Sphere sphere3 = new Sphere(new Color(0, 0, 20), new Material(0.5, 0.5, 1200,  0, 0.5), //
+		Sphere sphere3 = new Sphere(new Color(255, 0, 20), new Material(0.5, 0.5, 1200,  0, 0.5), //
 				20, new Point3D(-75, -33, 140)); // sphere 3
-		Sphere sphere4 = new Sphere(new Color(0, 0, 20), new Material(0.5, 0.5, 1200,  0, 0.5), //
+		Sphere sphere4 = new Sphere(new Color(255, 0, 20), new Material(0.5, 0.5, 1200,  0, 0.5), //
 				20, new Point3D(-25, -48, 140)); // sphere 4
 
 		scene.addIntersectable(plane, plane2 //
@@ -136,15 +136,13 @@ public class MinitProject1Test {
 				new Vector(0, 1, 0)); // ground Plane plane2
 		Plane plane2 = new Plane(new Color(0, 30, 30), new Material(0.5, 0.5, 1200), //
 				new Point3D(0, 20, 600), new Vector(0, 0, 1)); // background plane
-
-		Sphere sphere = new Sphere(new Color(0, 0, 20), new Material(0.5, 0.5, 1200, 0, 0.5), //
-				20, new Point3D(75, -3, 140)); // sphere 1
-		Sphere sphere2 = new Sphere(new Color(0, 0, 20), new Material(0.5, 0.5, 1200, 0, 0.5), //
-				20, new Point3D(25, -3, 140)); // sphere 2
-		Sphere sphere3 = new Sphere(new Color(0, 0, 20), new Material(0.5, 0.5, 1200,0, 0.5), //
-				20, new Point3D(-75, -3, 140)); // sphere 3
-		Sphere sphere4 = new Sphere(new Color(0, 0, 20), new Material(0.5, 0.5, 1200,0, 0.5), //
-				20, new Point3D(-25, -3, 140)); // sphere 4
+		Material shpere_mat =  new Material(0.5, 0.5, 1200, 0, 0.5);
+		Color shpere_color =new Color(0, 0, 20);
+		double shpere_radius = 20;
+		Sphere sphere = new Sphere(shpere_color,shpere_mat,	shpere_radius, new Point3D(75, -3, 140)); // sphere 1
+		Sphere sphere2 = new Sphere(shpere_color, shpere_mat, shpere_radius, new Point3D(25, -3, 140)); // sphere 2
+		Sphere sphere3 = new Sphere(shpere_color, shpere_mat, shpere_radius, new Point3D(-75, -3, 140)); // sphere 3
+		Sphere sphere4 = new Sphere(shpere_color, shpere_mat, shpere_radius, new Point3D(-25, -3, 140)); // sphere 4
 		// window for sphere 1
 		Polygon square1 = new Polygon(new Color(0, 0, 0), new Material(0.1, 0.1, 300, 0.8, 0, 0, 0.1), //
 				new Point3D(75, 20, 100), new Point3D(36, 20, 100), new Point3D(36, -40, 100),
