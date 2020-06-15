@@ -41,6 +41,7 @@ public class Render {
 
     
 	/**
+	 * פיקסל עזר לשימוש בתרד
 	 * Pixel is an internal helper class whose objects are associated with a Render object that
 	 * they are generated in scope of. It is used for multithreading in the Renderer and for follow up
 	 * its progress.<br/>
@@ -185,6 +186,7 @@ public class Render {
 //        }
 //    }
 	/**
+	 * פונקציה ליצירת מולטי תרד
 	 * Set multithreading <br>
 	 * - if the parameter is 0 - number of coress less 2 is taken
 	 * 
@@ -207,6 +209,7 @@ public class Render {
 	}
 
 	/**
+	 * פונקציה להדפסת אחוזים
 	 * Set debug printing on
 	 * 
 	 * @return the Render object itself
@@ -216,6 +219,7 @@ public class Render {
 		return this;
 	}
 	/**
+	 * פונקציה להטמעת מספר הקרניים
 	 * setter of the ray samples count
 	 *
 	 * @param sampleCount
@@ -225,6 +229,7 @@ public class Render {
 		return this;
 	}
     /**
+     * פונקציה להדפסת הגריד
      * prints a 2D grid on the rendered picture
      *
      * @param interval - the number of pixels between each line
@@ -269,6 +274,9 @@ public class Render {
      */
 
 	/**
+	 * פונקציה המקבלת נקודה ומחשבת את הצבע
+	 * חישוב השקיפות
+	 * הדיפיוז והספקולר
 	 * calculates the color at a certain point (pixel)
 	 *
 	 * @param - GeoPoint in the space (pixel on the view plane)
@@ -298,6 +306,7 @@ public class Render {
 				}
 			}
 		}
+		
 		double kr = mat.getKr();
 		double kkr = k * kr;
 		if (kkr > MIN_CALC_COLOR_K) {
@@ -338,6 +347,11 @@ public class Render {
 
     
 	/**
+	 * פונקציה למיני פרוייקט שלב ראשון לשיפור התמונה
+	 * במקום לשלוח קרן אחת לדיפיוז והספקולר
+	 * לשקיפות והשתקפות
+	 * מבוצע רנדומלי
+	 * 
 	 * calculates the matte effect by an average of the perturbed rays
 	 *
 	 * @return color of a pixel
@@ -443,6 +457,9 @@ public class Render {
     }
 
     /**
+     * פונקציה המחזירה את השקיפות
+     * כאשר 1 זה אטום
+     * ו0 עד 1 זה אחוזי השקיפות
      * the function calculates the transparency of the geometry ang the point
      *
      * @param l        - the direction of the light source
@@ -468,6 +485,7 @@ public class Render {
 
 
 	/**
+	 * פונקציה המחזירה קרן שקיפות
 	 * the function calculates the reflected ray from the geometry
 	 *
 	 * @param n     - the normal to the geometry
@@ -486,6 +504,7 @@ public class Render {
 	}
 
 	/**
+	 * פונקציה המחזירה קרן השתקפות
 	 * the function refracts the ray by Snell's law
 	 *
 	 * @param point - the intersection point
