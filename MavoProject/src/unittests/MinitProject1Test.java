@@ -71,6 +71,88 @@ public class MinitProject1Test {
 	}
 
 
+	
+	/**
+	 * integration tests for reflection and refraction
+	 */
+	@Test
+	public void testReflectionRefracted2() {
+		Scene scene = new Scene("reflection test");
+		scene.setCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)));
+		
+
+		scene.setDistance(1000);
+		scene.setAmbient(new AmbientLight(new Color(255, 255, 255), 0));
+		scene.setBackground(Color.BLACK);
+		//משטח עם מקדם KR של מראה
+		Plane plane = new Plane(new Color(0, 0, 0), new Material(0.5, 0.5, 300, 0,0.8), new Point3D(0, 50, 60),
+				new Vector(0, 1, 0));
+		
+		Sphere sphere = new Sphere(new Color(88, 55, 227), new Material(0.5, 0.5, 300, 0, 0.2), 40,
+				new Point3D(0, 10, 80));
+		//head 
+		Sphere sphere2 = new Sphere(new Color(88, 55, 227), new Material(0.5, 0.5, 300, 0.4, 0.4), 20,
+				new Point3D(0, -45, 80));
+		//right eye
+		Sphere sphere3 = new Sphere(new Color(88, 55, 0), new Material(0.5, 0.5, 300, 0, 0), 4,
+				new Point3D(10, -50, 55));
+		Sphere sphere3_1 = new Sphere(new Color(0,0,0), new Material(0, 0, 0, 0, 0), 1,
+				new Point3D(10, -50, 50));
+		//left eye
+		Sphere sphere4 = new Sphere(new Color(88, 55, 0), new Material(0.5, 0.5, 300, 0, 0), 4,
+				new Point3D(-10, -50, 55));
+		Sphere sphere4_1 = new Sphere(new Color(0,0,0), new Material(0, 0, 0, 0, 0), 1,
+				new Point3D(-10, -50, 50));
+//		Sphere sphere3 = new Sphere(new Color(20, 20, 0), new Material(0.5, 0.5, 300, 0, 0.2), 10,
+//				new Point3D(0, 0, 80));
+//		Sphere sphere4 = new Sphere(new Color(20, 20, 20), new Material(0.5, 0.5, 300, 0, 0.2), 5,
+//				new Point3D(0, -15, 80));
+		//right hand
+		Sphere sphere_5 = new Sphere(new Color(88, 55, 227), new Material(0.5, 0.5, 300, 0, 0), //
+				20, new Point3D(45, -10, 200)); 
+		//right hand
+		Sphere sphere_6 = new Sphere(new Color(88, 55, 227), new Material(0.5, 0.5, 300, 0, 0), //
+				20, new Point3D(-45, -10, 200)); 
+		
+		//right ear
+		Sphere sphere7 = new Sphere(new Color(88, 55, 227), new Material(0.5, 0.5, 300, 0.4, 0.4), 8,
+				new Point3D(12, -65, 100));
+		
+		
+		Plane plane2 = new Plane(new Color(0, 0, 0), new Material(0.5, 0.5, 300, 0,0.8), new Point3D(0, 160, 80),
+				new Vector(1, 0.5, 0));
+		
+		//left ear
+		Sphere sphere8 = new Sphere(new Color(88, 55, 227), new Material(0.5, 0.5, 300, 0.4, 0.4), 8,
+				new Point3D(-12, -65, 100));
+		scene.addIntersectable(sphere4, sphere4_1, sphere3, sphere3_1,sphere2, plane, sphere, sphere_5, sphere_6, sphere7, sphere8);
+
+		//Point3D pos = new Point3D(20, -50, 0);
+		Point3D pos = new Point3D(0, -30, 10);
+
+		Color color = new Color(400, 300, 300);
+
+		PointLight point_light = new PointLight(color, pos, 1, 0.0005, 0.000005);
+
+
+		// 200, 150, 600, 450
+		
+		ImageWriter imageWriter = new ImageWriter("dubi building 2 (" + samples +")", 500, 400, 1200, 1200);
+		List<LightSource> lights = new ArrayList<LightSource>();
+		lights.add(point_light);
+
+		scene.setLights(lights);
+		Render render = new Render(imageWriter, scene)
+				.setMultithreading(3) //
+				.setDebugPrint()
+				.setSampleCount(samples);
+
+		render.renderImage();
+		render.writeToImage();
+	}
+
+
+	
 	/**
 	 * test case for matte and glossy surfaces
 	 */
