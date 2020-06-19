@@ -29,54 +29,12 @@ public class MinitProject1Test {
 	final int samples =15;
 
 
-	/**
-	 * integration tests for reflection and refraction
-	 */
-	@Test
-	public void testReflectionRefracted() {
-		Scene scene = new Scene("reflection test");
-		scene.setCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)));
-
-		scene.setDistance(1000);
-		scene.setAmbient(new AmbientLight(new Color(255, 255, 255), 0));
-		scene.setBackground(Color.BLACK);
-		Plane plane = new Plane(new Color(0, 0, 0), new Material(0.5, 0.5, 300, 0,0.8), new Point3D(0, 50, 60),
-				new Vector(0, 1, 0));
-		Sphere sphere = new Sphere(new Color(0, 0, 20), new Material(0.5, 0.5, 300, 0.5, 0.2), 20,
-				new Point3D(0, 30, 80));
-//		Sphere sphere2 = new Sphere(new Color(0, 20, 0), new Material(0.5, 0.5, 300, 0, 0.2), 9,
-//				new Point3D(0, 30, 80));
-		Sphere sphere3 = new Sphere(new Color(20, 20, 0), new Material(0.5, 0.5, 300, 0, 0.2), 10,
-				new Point3D(0, 0, 80));
-		Sphere sphere4 = new Sphere(new Color(20, 20, 20), new Material(0.5, 0.5, 300, 0, 0.2), 5,
-				new Point3D(0, -15, 80));
-		scene.addIntersectable(sphere3, sphere4,/*sphere2,*/ plane, sphere);
-
-		Point3D pos = new Point3D(20, -50, 0);
-		Color color = new Color(400, 300, 300);
-
-		PointLight point_light = new PointLight(color, pos, 1, 0.0005, 0.000005);
-
-		ImageWriter imageWriter = new ImageWriter("spheres building (" + samples +")", 500, 500, 1200, 1200);
-		List<LightSource> lights = new ArrayList<LightSource>();
-		lights.add(point_light);
-		scene.setLights(lights);
-		Render render = new Render(imageWriter, scene)
-				.setMultithreading(3) //
-				.setDebugPrint()
-				.setSampleCount(samples);
-
-		render.renderImage();
-		render.writeToImage();
-	}
-
-
 	
 	/**
 	 * integration tests for reflection and refraction
 	 */
 	@Test
-	public void testReflectionRefracted2() {
+	public void testReflectionRefractedDubi() {
 		Scene scene = new Scene("reflection test");
 		scene.setCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)));
 		
@@ -137,7 +95,7 @@ public class MinitProject1Test {
 
 		// 200, 150, 600, 450
 		
-		ImageWriter imageWriter = new ImageWriter("dubi building 2 (" + samples +")", 500, 400, 1200, 1200);
+		ImageWriter imageWriter = new ImageWriter("dubi building  (" + samples +")", 500, 400, 1200, 1200);
 		List<LightSource> lights = new ArrayList<LightSource>();
 		lights.add(point_light);
 
@@ -152,7 +110,8 @@ public class MinitProject1Test {
 	}
 
 
-	
+
+
 	/**
 	 * test case for matte and glossy surfaces
 	 */
@@ -168,25 +127,34 @@ public class MinitProject1Test {
 		Plane plane2 = new Plane(new Color(0, 30, 30), new Material(0.5, 0.5, 1200), //
 				new Point3D(0, 20, 600), new Vector(0, 0, 1)); // background plane
 
-		Sphere sphere = new Sphere(new Color(255, 0, 20), new Material(0.5, 0.5, 1200, 0, 0.5), //
-				20, new Point3D(75, -3, 140)); // sphere 1
-		Sphere sphere2 = new Sphere(new Color(255, 0, 20), new Material(0.5, 0.5, 1200,  0, 0.5), //
-				20, new Point3D(25, -18, 140)); // sphere 2
-		Sphere sphere3 = new Sphere(new Color(255, 0, 20), new Material(0.5, 0.5, 1200,  0, 0.5), //
-				20, new Point3D(-75, -33, 140)); // sphere 3
-		Sphere sphere4 = new Sphere(new Color(255, 0, 20), new Material(0.5, 0.5, 1200,  0, 0.5), //
+		Sphere sphere = new Sphere(new Color(255, 0, 0), new Material(0.5, 0.5, 1200, 0, 0.5), //
+				20, new Point3D(75, -80, 140)); // sphere 1
+		Sphere sphere4 = new Sphere(new Color(0, 0, 20), new Material(0.5, 0.5, 1200,  0, 0.5), //
 				20, new Point3D(-25, -48, 140)); // sphere 4
+		Sphere sphere2 = new Sphere(new Color(0, 255, 0), new Material(0.5, 0.5, 1200,  0, 0.5), //
+				20, new Point3D(25, -18, 140)); // sphere 2
+		Sphere sphere3 = new Sphere(new Color(0, 0, 255), new Material(0.5, 0.5, 1200,  0, 0.5), //
+				20, new Point3D(-75, -33, 140)); // blue
+	
 
-		scene.addIntersectable(plane, plane2 //
-				, sphere, sphere2, sphere3, sphere4);
+		
+
+		scene.addIntersectable(plane, plane2  //
+				, sphere, sphere2, sphere3, sphere4 );
 
 		Point3D pos = new Point3D(0, -30, 30);
+
+		//Point3D pos = new Point3D(0, 0, 20);
 		Color color = new Color(400, 300, 300);
 
 		PointLight point_light = new PointLight(color, pos, 1, 0.0005, 0.000005);
+		//ImageWriter imageWriter = new ImageWriter("Glossy test (" + samples +")",200, 150, 600, 450);
+		
+		ImageWriter imageWriter = new ImageWriter("Glossy test (" + samples +")",  200, 250, 600, 500);
 
-		ImageWriter imageWriter = new ImageWriter("Glossy test (" + samples +")", 200, 150, 600, 450);
+
 		List<LightSource> lights = new ArrayList<LightSource>();
+
 		lights.add(point_light);
 		scene.setLights(lights);
 		Render render = new Render(imageWriter, scene)
@@ -197,11 +165,14 @@ public class MinitProject1Test {
 		render.writeToImage();
 
 	}
-
-
+	
+	
 	/**
-	 * test case for matte and glossy surfaces
+	 * test case for object behind light
+	 * chagne kt with kr and camera replace the vectors vup vright
 	 */
+
+
 	/**
 	 * test case for matte and glossy surfaces
 	 */
