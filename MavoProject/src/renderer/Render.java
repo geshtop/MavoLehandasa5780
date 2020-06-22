@@ -2,6 +2,9 @@ package renderer;
 
 import elements.Camera;
 import elements.LightSource;
+import geometries.BoundaryVolume;
+import geometries.Geometries;
+import geometries.Intersectable;
 import primitives.*;
 import scene.Scene;
 import primitives.Util;
@@ -22,6 +25,7 @@ public class Render {
     private static final int MAX_CALC_COLOR_LEVEL = 10;
     private static final double MIN_CALC_COLOR_K = 0.001;
     private static final double Delta = 0.1;
+    private boolean _usingBoundaryVolume = false;
     ImageWriter image;
     int _sampleCount;
     Scene scene;
@@ -228,6 +232,8 @@ public class Render {
 		_sampleCount = sampleCount;
 		return this;
 	}
+	
+
     /**
      * פונקציה להדפסת הגריד
      * prints a 2D grid on the rendered picture
@@ -472,7 +478,10 @@ public class Render {
         Vector delta = n.scale(n.dotProduct(lightDirection) > 0 ? Delta : -Delta);
         Point3D point = geopoint.point.add(delta);
         Ray lightRay = new Ray(point, lightDirection);
-        List<GeoPoint> intersections = scene.getGeometries().findIntersections(lightRay);
+        
+        //this is the original function that find the instection with all the geometirs
+        //List<GeoPoint> intersections = scene.getGeometries().findIntersections(lightRay);
+        List<GeoPoint> intersections = splitFindIntersection(lightRay);
         if (intersections == null) return 1;
         double ktr = 1;
         for (GeoPoint gp : intersections)
@@ -526,14 +535,74 @@ public class Render {
      * @return the closest geometry intersection point to the camera
      */
     private GeoPoint findClosestIntersection(Ray ray) {
-
-        List<GeoPoint> points = scene.getGeometries().findIntersections(ray);
-
+    	//this is the original function before the boundry 
+        //List<GeoPoint> points = scene.getGeometries().findIntersections(ray);
+        List<GeoPoint> points = splitFindIntersection(ray);
         if (points == null)
             return null;
         Point3D p0 = ray.get_POO();
         return pointClosestTo(points, p0);
     }
+    
+    //####################################################################Boundry changes #####################################################################//
+	/**
+	 * Setter of boundary volume
+	 * 
+	 * @param usingBoundaryVolume
+	 */
+	public Render setUsingBoundaryVolume(boolean usingBoundaryVolume) {
+		_usingBoundaryVolume = usingBoundaryVolume;
+		return this;
+	}
+    
+ // for saving the time of new list creation several times
+ 	private List<GeoPoint> intersectionsBVH = new ArrayList<GeoPoint>();
+
+ 	/**
+ 	 * travel around the geometries tree whether the ray is inside the box or not
+ 	 * thus , build the following intersections
+ 	 * 
+ 	 * @param geometries - Geometries
+ 	 */
+ 	public void GeometriesBVH(Geometries geometries, Ray ray) {
+ 		if(ray == null) return;
+ 		if (geometries.boundaryVolume().boundingIntersection(ray)) { //founded point with box
+ 			if (geometries.getAmount() == 1) {
+ 				BoundaryVolume boundary = geometries.boundaryVolume();
+ 				if (boundary.boundingIntersection(ray) || boundary == null)// if plane
+ 					if (geometries.findIntersections(ray) != null)
+ 						intersectionsBVH.addAll(geometries.findIntersections(ray));
+ 				return;
+ 			}
+ 			for (Intersectable geo : geometries.getShapes()) {
+ 				GeometriesBVH(new Geometries(geo), ray);
+ 				return;
+ 			}
+ 		} else {
+ 			return;
+ 		}
+
+ 	}
+ 	
+
+	/**
+	 * in bvh accelartion the code run up faster then for comparing the run time ,
+	 * the programmer create this method
+	 * 
+	 * @param ray - ray in space
+	 * @return list of geometry points
+	 */
+	public List<GeoPoint> splitFindIntersection(Ray ray) {
+		Geometries geometries = scene.getGeometries();
+		if (_usingBoundaryVolume) {		
+			GeometriesBVH(geometries, ray);
+			return intersectionsBVH;
+		} else {
+			return geometries.findIntersections(ray);
+		}
+	}
+    //####################################################################Boundry changes END #####################################################################//
+
 
     /**
      * finds the closest point from a given list to a point

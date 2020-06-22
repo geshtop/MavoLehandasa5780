@@ -3,6 +3,8 @@
  */
 package geometries;
 
+import primitives.Point3D;
+
 /**
  * class represents a list 3D space shapes which could intersect a ray.
  * @author Owner
@@ -57,7 +59,15 @@ public class Geometries implements Intersectable {
             _geometries.remove(geo);
         }
     }
+	/**
+	 * Gets the amount of shapes
+	 * @return amount of shapes in geometries
+	 */
+	public int getAmount() {
+		return _geometries.size();
+	}
     
+
     
 	/**
 	 * getter of shapes
@@ -87,4 +97,40 @@ public class Geometries implements Intersectable {
 			return null;
 		return intersections;
 	}
+	
+	
+	/**
+	 * calculate the boundaries of the geometries
+	 * @return boundary of geometries
+	 */
+	public BoundaryVolume boundaryVolume()
+    {
+    	BoundaryVolume boundary ;
+    	double minX = Double.POSITIVE_INFINITY,minY = Double.POSITIVE_INFINITY,minZ = Double.POSITIVE_INFINITY;
+    	double maxX = Double.NEGATIVE_INFINITY ,maxY = Double.NEGATIVE_INFINITY ,maxZ = Double.NEGATIVE_INFINITY;
+    	double x=0 ,y=0 ,z =  0;
+    	
+    	for(Intersectable shape : _geometries)
+    	{
+    		if(!(shape instanceof Plane)) {
+    		boundary = shape.boundaryVolume();
+    		x = boundary.min.get_x().get();
+    		y = boundary.min.get_y().get();
+    		z = boundary.min.get_z().get();
+    		if(x<minX)minX=x;  if(y<minY)
+    	    minY=y; if(z<minZ) minZ=z;
+    	    x = boundary.max.get_x().get();
+    		y = boundary.max.get_y().get();
+    		z = boundary.max.get_z().get();
+    		if(x>maxX) maxX=x;if(y>maxY)
+        	maxY=y;if(z>maxZ) maxZ=z;
+    		}
+    		
+    	}
+    	
+        return new BoundaryVolume(new Point3D(minX,minY,minZ),//
+        		new Point3D(maxX,maxY,maxZ),new Geometries(this));
+    	
+
+}
 }

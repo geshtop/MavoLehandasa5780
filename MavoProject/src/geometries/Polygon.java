@@ -150,4 +150,38 @@ public class Polygon extends Geometry {
         Point3D intersection = intersections.get(0).point;
         return Arrays.asList(new GeoPoint(this, intersection));
     }
+	
+	public BoundaryVolume boundaryVolume() {
+    	double minX= _vertices.get(0).get_x().get();
+    	double maxX = minX;
+    	double minY= _vertices.get(0).get_y().get();
+    	double maxY = minY;
+    	double minZ= _vertices.get(0).get_z().get();
+    	double maxZ = minZ;
+    	
+    	double x = 0;
+    	double y=0;
+    	double z =0;
+    	for(Point3D p : _vertices)
+    	{
+    		x=p.get_x().get();
+    		y=p.get_y().get();
+    		z=p.get_z().get();
+    		if(x<minX)
+    			minX=x;
+    		if(x>maxX)
+    			maxX=x;
+    		if(y<minY)
+    			minY=y;
+    		if(y>maxY)
+    			maxY=y;
+    		if(z<minZ)
+    			minZ=z;
+    		if(z>maxZ)
+    			maxZ=z;
+    	}
+    	
+    	return new BoundaryVolume(new Point3D(minX,minY,minZ)//
+    			,new Point3D(maxX,maxY,maxZ),new Geometries(this));
+    }
 }

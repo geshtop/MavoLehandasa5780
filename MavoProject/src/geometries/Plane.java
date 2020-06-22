@@ -157,6 +157,12 @@ public class Plane extends Geometry {
 	 
 	}
 
+	@Override
+	public BoundaryVolume boundaryVolume() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 	
 }

@@ -26,7 +26,7 @@ import scene.Scene;
 
 public class MinitProject1Test {
 
-	final int samples =80;
+	final int samples =1;
 
 
 	
@@ -122,6 +122,7 @@ public class MinitProject1Test {
 		scene.setDistance(1000);
 		scene.setAmbient(new AmbientLight(new Color(255, 255, 255), 0));
 		scene.setBackground(Color.BLACK);
+		//kt is 0.05
 		Plane plane = new Plane(new Color(0, 0, 0), new Material(0.5, 0.5, 300, 0, 0.4, 0.05, 0), //
 				new Point3D(0, 20, 100), new Vector(0, 1, 0)); // ground
 		Plane plane2 = new Plane(new Color(0, 30, 30), new Material(0.5, 0.5, 1200), //
@@ -208,6 +209,7 @@ public class MinitProject1Test {
 		Sphere spherex44 = new Sphere(new Color(0, 0, 255), shpere_mat, 4, new Point3D(-25, -40, 140)); // sphere 4
 		
 		// window for sphere 1
+		//ther radius of the first window is 0.1
 		Polygon square1 = new Polygon(new Color(0, 0, 0), new Material(0.1, 0.1, 300, 0.8, 0, 0, 0.1), //
 				new Point3D(105, 20, 100), new Point3D(60, 20, 100), new Point3D(60, -50, 100),
 				new Point3D(105, -50, 100));

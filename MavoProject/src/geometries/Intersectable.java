@@ -17,7 +17,7 @@ public interface Intersectable {
 	 * @return intersection point
 	 */
 	List<GeoPoint> findIntersections(Ray ray);
-	
+	BoundaryVolume boundaryVolume();
 
 	
 	public static class GeoPoint {
@@ -54,6 +54,7 @@ public interface Intersectable {
 		public Geometry getGeometry() {
 			return geometry;
 		}
+		
 
 		// ***************** Administration ******************** //
 		@Override
