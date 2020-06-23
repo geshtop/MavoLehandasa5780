@@ -36,10 +36,10 @@ public class MiniProject2 {
 				new Vector(0, 1, 0));
 		
 		Polygon g1 = new Polygon(new Color(20, 20, 20), new Material(0.5, 0.5, 300, 0.2, 0), //
-				new Point3D(-1000, -1000, 30), 
-				new Point3D(-950, -1000, 30),
-				new Point3D(-950, -600, 30),
-				new Point3D(-1000, -600, 30));
+				new Point3D(-1000, -1000, 30),//top left 
+				new Point3D(-950, -1000, 30),//top right
+				new Point3D(-950, -600, 30), //bottom right
+				new Point3D(-1000, -600, 30)); // bottom left
 		
 		Polygon g2 = new Polygon(new Color(20, 20, 20), new Material(0.5, 0.5, 300, 0.2, 0), //
 				new Point3D(-970, -1000, 30),//top left
@@ -91,15 +91,80 @@ public class MiniProject2 {
 				new Point3D(-600, -600, 30)// bottom left
 				);
 		Polygon e4 = new Polygon(new Color(20, 20, 20), new Material(0.5, 0.5, 300, 0.2, 0), //
-				new Point3D(-600, -1000, 30), 
-				new Point3D(-550, -1000, 30),
-				new Point3D(-550, -600, 30),
-				new Point3D(-600, -600, 30));
+				new Point3D(-600, -1000, 30), //top left
+				new Point3D(-550, -1000, 30),//top right
+				new Point3D(-550, -600, 30),//bottom right
+				new Point3D(-600, -600, 30)); // bottom left
 		
 		Geometries e_group =new Geometries(e1,e2, e3, e4);
 
 		
 		
+		Polygon u1 = new Polygon(new Color(20, 20, 20), new Material(0.5, 0.5, 300, 0.2, 0), //
+				new Point3D(-200, -1000, 30), //top left
+				new Point3D(-150, -1000, 30),//top right
+				new Point3D(-150, -600, 30),//bottom right
+				new Point3D(-200, -600, 30)); // bottom left
+		Polygon u2 = new Polygon(new Color(20, 20, 20), new Material(0.5, 0.5, 300, 0.2, 0), //
+				new Point3D(-200, -630, 30),//top left
+				new Point3D(100, -630, 30),//top right
+				new Point3D(100, -600, 30), //bottom right
+				new Point3D(-200, -600, 30)// bottom left
+				);
+		Polygon u3 = new Polygon(new Color(20, 20, 20), new Material(0.5, 0.5, 300, 0.2, 0), //
+				new Point3D(50, -1000, 30), //top left
+				new Point3D(100, -1000, 30),//top right
+				new Point3D(100, -600, 30),//bottom right
+				new Point3D(50, -600, 30)); // bottom left
+		Geometries u_group =new Geometries(u1, u2 ,u3);
+
+		
+		Polygon l1 = new Polygon(new Color(20, 20, 20), new Material(0.5, 0.5, 300, 0.2, 0), //
+				new Point3D(200, -1000, 30), //top left
+				new Point3D(250, -1000, 30),//top right
+				new Point3D(250, -600, 30),//bottom right
+				new Point3D(200, -600, 30)); // bottom left
+		
+		Polygon l2 = new Polygon(new Color(20, 20, 20), new Material(0.5, 0.5, 300, 0.2, 0), //
+				new Point3D(200, -630, 30),//top left
+				new Point3D(500, -630, 30),//top right
+				new Point3D(500, -600, 30), //bottom right
+				new Point3D(200, -600, 30)// bottom left
+				);
+		
+		Geometries l_group =new Geometries(l1, l2);
+		
+		
+		
+		Polygon a1 = new Polygon(new Color(20, 20, 20), new Material(0.5, 0.5, 300, 0.2, 0), //
+				new Point3D(600, -1000, 30), //top left
+				new Point3D(650, -1000, 30),//top right
+				new Point3D(650, -600, 30),//bottom right
+				new Point3D(600, -600, 30)); // bottom left
+		
+		Polygon a2 = new Polygon(new Color(20, 20, 20), new Material(0.5, 0.5, 300, 0.2, 0), //
+				new Point3D(600, -1000, 30),//top left
+				new Point3D(850, -1000, 30),//top right
+				new Point3D(850, -970, 30), //bottom right
+				new Point3D(600, -970, 30)// bottom left
+
+				);
+		Polygon a3 = new Polygon(new Color(20, 20, 20), new Material(0.5, 0.5, 300, 0.2, 0), //
+				new Point3D(600, -830, 30),//top left
+				new Point3D(850, -830, 30),//top right
+				new Point3D(850, -800, 30), //bottom right
+				new Point3D(600, -800, 30)// bottom left
+
+				);
+		Polygon a4 = new Polygon(new Color(20, 20, 20), new Material(0.5, 0.5, 300, 0.2, 0), //
+				new Point3D(850, -1000, 30), //top left
+				new Point3D(900, -1000, 30),//top right
+				new Point3D(900, -600, 30),//bottom right
+				new Point3D(850, -600, 30)); // bottom left
+		
+		Geometries a_group =new Geometries(a1, a2, a3,a4);
+
+
 		Polygon t1 = new Polygon(new Color(20, 20, 20), new Material(0.5, 0.5, 300, 0.2, 0), //
 				new Point3D(-1000, -450, 30),//top left
 				new Point3D(-700, -450, 30),//top right
@@ -137,6 +202,9 @@ public class MiniProject2 {
 				plane,
 				g_group,
 				e_group,
+				u_group,
+				l_group,
+				a_group,	
 				t_group
 				);
 		
