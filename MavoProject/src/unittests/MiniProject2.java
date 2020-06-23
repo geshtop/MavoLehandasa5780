@@ -71,6 +71,35 @@ public class MiniProject2 {
 		Geometries g_group =new Geometries(g1,g2,g3,g4,g5);
 		
 		
+		Polygon e1 = new Polygon(new Color(20, 20, 20), new Material(0.5, 0.5, 300, 0.2, 0), //
+				new Point3D(-600, -1000, 30),//top left
+				new Point3D(-300, -1000, 30),//top right
+				new Point3D(-300, -970, 30), //bottom right
+				new Point3D(-600, -970, 30)// bottom left
+				);
+		Polygon e2 = new Polygon(new Color(20, 20, 20), new Material(0.5, 0.5, 300, 0.2, 0), //
+				new Point3D(-600, -830, 30),//top left
+				new Point3D(-400, -830, 30),//top right
+				new Point3D(-400, -800, 30), //bottom right
+				new Point3D(-600, -800, 30)// bottom left
+
+				);
+		Polygon e3 = new Polygon(new Color(20, 20, 20), new Material(0.5, 0.5, 300, 0.2, 0), //
+				new Point3D(-600, -630, 30),//top left
+				new Point3D(-300, -630, 30),//top right
+				new Point3D(-300, -600, 30), //bottom right
+				new Point3D(-600, -600, 30)// bottom left
+				);
+		Polygon e4 = new Polygon(new Color(20, 20, 20), new Material(0.5, 0.5, 300, 0.2, 0), //
+				new Point3D(-600, -1000, 30), 
+				new Point3D(-550, -1000, 30),
+				new Point3D(-550, -600, 30),
+				new Point3D(-600, -600, 30));
+		
+		Geometries e_group =new Geometries(e1,e2, e3, e4);
+
+		
+		
 		Polygon t1 = new Polygon(new Color(20, 20, 20), new Material(0.5, 0.5, 300, 0.2, 0), //
 				new Point3D(-1000, -450, 30),//top left
 				new Point3D(-700, -450, 30),//top right
@@ -84,6 +113,10 @@ public class MiniProject2 {
 				new Point3D(-830, -450, 30), //top right
 				new Point3D(-830, -50, 30), //bottom right
 				new Point3D(-880, -50, 30));// bottom left
+		
+		
+		
+		
 		
 		
 		Geometries t_group =new Geometries(t1,t2);
@@ -103,6 +136,7 @@ public class MiniProject2 {
 		scene.addIntersectable(
 				plane,
 				g_group,
+				e_group,
 				t_group
 				);
 		
