@@ -34,6 +34,17 @@ public class MiniProject2 {
 		scene.setBackground(Color.BLACK);
 		Plane plane = new Plane(new Color(0, 0, 0), new Material(0.5, 0.5, 300, 0.8, 0), new Point3D(0, 50, 60),
 				new Vector(0, 1, 0));
+		
+		Polygon chut1 = new Polygon(new Color(20, 20, 20), new Material(0.5, 0.5, 300, 0.2, 0), //
+				new Point3D(-100, -250, 20), new Point3D(-90, -250, 20), new Point3D(-90, -30, 30),
+				new Point3D(-100, -30, 30));
+		
+		Triangle t1=  new Triangle(Color.BLACK, new Material(0.8, 0.2, 300),
+                  new Point3D(-450, 150, 150), new Point3D(-150, 150, 150), new Point3D(-75, -75, 150));
+				Triangle t2 =   new Triangle(Color.BLACK, new Material(0.8, 0.2, 300),
+                  new Point3D(-550, 150, 150), new Point3D(-70, -70, 50), new Point3D(-75, -75, 150));
+		
+		
 		Sphere sphere = new Sphere(new Color(0, 0, 20), new Material(0.5, 0.5, 300, 0.2, 0.5), 20,
 				new Point3D(0, -50, 80));
 		Sphere sphere2 = new Sphere(new Color(0, 20, 0), new Material(0.5, 0.5, 300, 0.2, 0), 9,
@@ -73,9 +84,8 @@ public class MiniProject2 {
 		Triangle triangle1 = new Triangle(new Color(20, 20, 20), new Material(0.5, 0.5, 300, 0.2, 0),//
 				new Point3D(-100, -120, 80) ,new Point3D(0, -200, 80),
 				new Point3D(100, -100, 30));
-//		Polygon polygon1 = new Polygon (new Color(20, 20, 20), new Material(0.5, 0.5, 300, 0.2, 0),//
-//				new Point3D(-100, -50, 20) ,new Point3D(-90, -50, 20),
-//				new Point3D(-100, -30, 20), new Point3D(-90, -30, 20));
+		
+		
 		Polygon polygon1 = new Polygon(new Color(20, 20, 20), new Material(0.5, 0.5, 300, 0.2, 0), //
 				new Point3D(-100, -50, 20), new Point3D(-90, -50, 20), new Point3D(-90, -30, 30),
 				new Point3D(-100, -30, 30));
@@ -114,28 +124,43 @@ public class MiniProject2 {
 //		scene.addIntersectable(
 //				triangle1,geo1,geo2,geo3,geo4,geo5 ,plane);
 
+		
+		Geometries geo32 =new Geometries(plane,chut1);
+				
+		Geometries geo33 = new Geometries(/*t1,t2,*/sphere26, sphere18);
 		scene.addIntersectable(
-				plane,
-				sphere,
-				sphere2,
-				sphere3,
-				sphere4,
-				sphere5 ,
-				sphere6,
-				sphere7,
-				sphere9,
-				sphere10,
-				sphere11,
-				sphere12,
-				sphere13,
-//				sphere14,
-//				sphere15,
-				sphere16,
-				polygon1, polygon2,polygon3
+				geo33,
+				plane, geo32//,t1,t2
+//				sphere,
+//				sphere2,
+//				sphere3,
+//				sphere4,
+//				sphere5 ,
+//				sphere6,
+//				sphere7,
+//				sphere9,
+//				sphere10,
+//				sphere11,
+//				sphere12,
+//				sphere13,
+////				sphere14,
+////				sphere15,
+//				sphere16,
+//				polygon1, polygon2,polygon3
+//				,sphere21
+//				,sphere19
+//				,sphere20
+//				,sphere22
+//				,sphere23
+//				,sphere24
+//				,sphere25
+//				,sphere26
+//				,sphere17
+//				,sphere18
 				//sphere8
 				/*,,,,,,,
-				,,,,sphere21,sphere17,sphere18
-				,sphere19,sphere20,sphere22,sphere23,sphere24,sphere25,sphere26,
+				,,,,,,
+				,,,,,,,,
 				,,
 				,, , ,*/ );
 		
@@ -151,10 +176,11 @@ public class MiniProject2 {
 		lights.add(directional_light);
 		scene.setLights(lights);
 		Render render = new Render(imageWriter, scene)
-				.setMultithreading(2)
-				.setSampleCount(1)
-				.setDebugPrint().setDebugPrint();
-				//.setUsingBoundaryVolume(true);
+				//.setMultithreading(2)
+				//.setSampleCount(1)
+				//.setDebugPrint()
+				.setUsingBoundaryVolume(true)
+				;
 		render.renderImage();
 		render.writeToImage();
 	}

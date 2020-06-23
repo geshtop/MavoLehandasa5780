@@ -152,7 +152,19 @@ public class Render {
 		                        (image.getNx(), image.getNy(), pixel.col, pixel.row,
 		                                scene.getDistance(), image.getHeight(), image.getWidth());
 		                //מחזירה את הנקודה הכי קרובה
+		                if( pixel.col== 999 && pixel.row == 999   ) {
+					 		//System.out.println("here ");
+		                	int val = 1;
+		                	System.out.println("threads" + _threads);
+					 	}				 	
+
 		                GeoPoint closestPoint = findClosestIntersection(ray);
+
+//		                if(closestPoint != null) {
+//		                	System.out.print(" pixel.col " + pixel.col);
+//						 	System.out.print(" pixel.row " + pixel.row);
+//						 	System.out.println(" ");
+//		                }
 		                //בודקים אם נמצאה נקודה צובעים בצבע המחושב ואם לא בצבע הרקע
 		                image.writePixel(pixel.col, pixel.row, closestPoint == null ? scene.getBackground().getColor() : calcColor(closestPoint, ray).getColor());
 
@@ -537,9 +549,13 @@ public class Render {
     private GeoPoint findClosestIntersection(Ray ray) {
     	//this is the original function before the boundry 
         //List<GeoPoint> points = scene.getGeometries().findIntersections(ray);
+    	
         List<GeoPoint> points = splitFindIntersection(ray);
+
         if (points == null)
             return null;
+	 	//System.out.print("points" + points.size());
+
         Point3D p0 = ray.get_POO();
         return pointClosestTo(points, p0);
     }
@@ -556,7 +572,7 @@ public class Render {
 	}
     
  // for saving the time of new list creation several times
- 	private List<GeoPoint> intersectionsBVH = new ArrayList<GeoPoint>();
+ 	private Geometries filteredBVHGeometries = new Geometries();
 
  	/**
  	 * travel around the geometries tree whether the ray is inside the box or not
@@ -566,17 +582,20 @@ public class Render {
  	 */
  	public void GeometriesBVH(Geometries geometries, Ray ray) {
  		if(ray == null) return;
- 		if (geometries.boundaryVolume().boundingIntersection(ray)) { //founded point with box
+ 		BoundaryVolume bm = geometries.boundaryVolume();
+ 		boolean hasPoints = bm.boundingIntersection(ray);
+ 		int amount = geometries.getShapes().size();
+ 		if (bm.boundingIntersection(ray) || bm == null) { //founded point with box
  			if (geometries.getAmount() == 1) {
- 				BoundaryVolume boundary = geometries.boundaryVolume();
- 				if (boundary.boundingIntersection(ray) || boundary == null)// if plane
- 					if (geometries.findIntersections(ray) != null)
- 						intersectionsBVH.addAll(geometries.findIntersections(ray));
+ 				BoundaryVolume boundary = geometries.getShapes().get(0).boundaryVolume();
+ 				if (boundary == null || boundary.boundingIntersection(ray))// if plane
+ 					filteredBVHGeometries.add(geometries);
+ 					//if (geometries.findIntersections(ray) != null)
+ 						//intersectionsBVH.addAll(geometries.findIntersections(ray));
  				return;
  			}
  			for (Intersectable geo : geometries.getShapes()) {
  				GeometriesBVH(new Geometries(geo), ray);
- 				return;
  			}
  		} else {
  			return;
@@ -593,10 +612,11 @@ public class Render {
 	 * @return list of geometry points
 	 */
 	public List<GeoPoint> splitFindIntersection(Ray ray) {
+		filteredBVHGeometries =  new Geometries();
 		Geometries geometries = scene.getGeometries();
 		if (_usingBoundaryVolume) {		
 			GeometriesBVH(geometries, ray);
-			return intersectionsBVH;
+			return filteredBVHGeometries.findIntersections(ray);
 		} else {
 			return geometries.findIntersections(ray);
 		}

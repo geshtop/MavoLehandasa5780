@@ -2,30 +2,15 @@ package geometries;
 
 import static primitives.Util.alignZero;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
 import java.lang.Math;
-import geometries.Intersectable.GeoPoint;
 import primitives.Point3D;
 import primitives.Ray;
-import primitives.Vector;
 
 public class BoundaryVolume {
 
 	public Point3D min;
 	public Point3D max;
-	public Geometries childs;
-	private Boolean FinalBoundary; 
-	public BoundaryVolume(Point3D point3d,  Geometries geometries) {
-		// TODO Auto-generated constructor stub
-	}
-	public BoundaryVolume(Point3D _min, Point3D _max, Geometries _childs) {
-		this.min = _min;
-		this.max = _max;
-		this.childs = _childs;
-		// TODO Auto-generated constructor stub
-	}
 	public BoundaryVolume(Point3D _min, Point3D _max) {
 		this.min = _min;
 		this.max = _max;
@@ -35,10 +20,9 @@ public class BoundaryVolume {
 	public boolean boundingIntersection(Ray ray) {
 			
 	    Point3D po = ray.get_POO();    
-	        
-		double dirfra_x = ray.get_direction().get_head().get_x().get();
-		double dirfra_y = ray.get_direction().get_head().get_y().get();
-		double dirfra_z = ray.get_direction().get_head().get_z().get();
+		double dirfra_x =  1.0f / ray.get_direction().get_head().get_x().get();
+		double dirfra_y =  1.0f / ray.get_direction().get_head().get_y().get();
+		double dirfra_z =  1.0f / ray.get_direction().get_head().get_z().get();
 
 
 		// lb is the corner of AABB with minimal coordinates - left bottom, rt is maximal corner

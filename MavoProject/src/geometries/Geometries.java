@@ -112,7 +112,17 @@ public class Geometries implements Intersectable {
     	
     	for(Intersectable shape : _geometries)
     	{
-    		if(!(shape instanceof Plane)) {
+    		if((shape instanceof Plane)){
+    			minX = Double.NEGATIVE_INFINITY;
+    			minY=Double.NEGATIVE_INFINITY;
+    			minZ=Double.NEGATIVE_INFINITY;
+    			maxX = Double.POSITIVE_INFINITY;
+    			maxY=Double.POSITIVE_INFINITY;
+    			maxZ=Double.POSITIVE_INFINITY;
+    			 
+    			 
+    		}
+    		else {
     		boundary = shape.boundaryVolume();
     		x = boundary.min.get_x().get();
     		y = boundary.min.get_y().get();
@@ -129,7 +139,7 @@ public class Geometries implements Intersectable {
     	}
     	
         return new BoundaryVolume(new Point3D(minX,minY,minZ),//
-        		new Point3D(maxX,maxY,maxZ),new Geometries(this));
+        		new Point3D(maxX,maxY,maxZ));
     	
 
 }
