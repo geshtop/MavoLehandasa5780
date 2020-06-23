@@ -68,7 +68,9 @@ public class MiniProject2 {
 				new Point3D(-800, -800, 30)// bottom left
 				);
 		
-		Geometries g_group =new Geometries(g1,g2,g3,g4,g5);
+		Sphere sphere_g = new Sphere(new Color(0, 0, 20), new Material(0.5, 0.5, 300, 0.2, 0.5), 30,
+				new Point3D(-800, -630, -70));
+		Geometries g_group =new Geometries(g1,g2,g3,g4,g5, sphere_g);
 		
 		
 		Polygon e1 = new Polygon(new Color(20, 20, 20), new Material(0.5, 0.5, 300, 0.2, 0), //
@@ -95,6 +97,7 @@ public class MiniProject2 {
 				new Point3D(-550, -1000, 30),//top right
 				new Point3D(-550, -600, 30),//bottom right
 				new Point3D(-600, -600, 30)); // bottom left
+		
 		
 		Geometries e_group =new Geometries(e1,e2, e3, e4);
 
