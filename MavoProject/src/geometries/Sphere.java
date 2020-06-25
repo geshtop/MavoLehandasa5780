@@ -113,12 +113,15 @@ public class Sphere extends RadialGeometry {
 	
 	 public BoundaryVolume boundaryVolume()
 	    {
+		 if(this.currentBv!= null ) return this.currentBv;
 	    	double cx = _center.get_x().get();
 	    	double cy = _center.get_y().get();
 	    	double cz = _center.get_z().get();
 	    	double r = this._radius;
-	    	return new BoundaryVolume(new Point3D(cx -r ,cy-r,cz-r) 
+	    	this.currentBv=new BoundaryVolume(new Point3D(cx -r ,cy-r,cz-r) 
 			    	,new Point3D(cx +r ,cy+r,cz+r)) ;
+	    	return this.currentBv;
+	    	
 	    }
 
 }

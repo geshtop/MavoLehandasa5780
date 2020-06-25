@@ -8,7 +8,6 @@ import primitives.Point3D;
 import primitives.Ray;
 
 public class BoundaryVolume {
-
 	public Point3D min;
 	public Point3D max;
 	public BoundaryVolume(Point3D _min, Point3D _max) {

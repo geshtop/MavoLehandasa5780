@@ -23,6 +23,7 @@ public class Geometries implements Intersectable {
     /**
 	 * Default constructor constructs the list as an empty ArrayList
 	 */
+    public BoundaryVolume currentBv;
 	public Geometries() {
 		_geometries = new ArrayList<Intersectable>();
 	}
@@ -105,6 +106,7 @@ public class Geometries implements Intersectable {
 	 */
 	public BoundaryVolume boundaryVolume()
     {
+		if(this.currentBv != null) return this.currentBv;
     	BoundaryVolume boundary ;
     	double minX = Double.POSITIVE_INFINITY,minY = Double.POSITIVE_INFINITY,minZ = Double.POSITIVE_INFINITY;
     	double maxX = Double.NEGATIVE_INFINITY ,maxY = Double.NEGATIVE_INFINITY ,maxZ = Double.NEGATIVE_INFINITY;
@@ -137,9 +139,9 @@ public class Geometries implements Intersectable {
     		}
     		
     	}
-    	
-        return new BoundaryVolume(new Point3D(minX,minY,minZ),//
+    	this.currentBv = new BoundaryVolume(new Point3D(minX,minY,minZ),//
         		new Point3D(maxX,maxY,maxZ));
+        return this.currentBv;
     	
 
 }

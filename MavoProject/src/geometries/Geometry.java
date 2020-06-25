@@ -13,18 +13,24 @@ public abstract class  Geometry implements Intersectable  {
      */
 	protected Color _emission;
 	protected Material material;
+	public BoundaryVolume currentBv;
+	
 	
 	public Geometry() {
 		this(Color.BLACK);
+		
+		
 	}
 	public Geometry(Color emission) {
 		this._emission = emission;
 		this.material = new Material(0.0,0.0, 0);
+		
 	}
 	
 	public Geometry(Color emission,  Material _material ) {
 		this._emission = emission;
 		this.material = _material;
+	
 	}
 	
     // ***************** Getters/Setters ********************** //

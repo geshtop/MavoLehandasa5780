@@ -151,9 +151,9 @@ public class Render {
 					 Ray ray = scene.getCamera().constructRayThroughPixel
 		                        (image.getNx(), image.getNy(), pixel.col, pixel.row,
 		                                scene.getDistance(), image.getHeight(), image.getWidth());
-//		                if( pixel.col== 999 && pixel.row == 999   ) {
-//		                	int val = 1;
-//					 	}				 	
+		                if( pixel.col== 999 && pixel.row == 999   ) {
+		                	int val = 1;
+					 	}				 	
 		                //מחזירה את הנקודה הכי קרובה
 		                GeoPoint closestPoint = findClosestIntersection(ray);
 		                //בודקים אם נמצאה נקודה צובעים בצבע המחושב ואם לא בצבע הרקע

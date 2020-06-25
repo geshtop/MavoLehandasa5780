@@ -152,6 +152,8 @@ public class Polygon extends Geometry {
     }
 	
 	public BoundaryVolume boundaryVolume() {
+		if(this.currentBv!= null ) return this.currentBv;
+		System.out.println("calculate ");
     	double minX= _vertices.get(0).get_x().get();
     	double maxX = minX;
     	double minY= _vertices.get(0).get_y().get();
@@ -181,7 +183,8 @@ public class Polygon extends Geometry {
     			maxZ=z;
     	}
     	
-    	return new BoundaryVolume(new Point3D(minX,minY,minZ)//
+    	this.currentBv = new BoundaryVolume(new Point3D(minX,minY,minZ)//
     			,new Point3D(maxX,maxY,maxZ));
+    	return this.currentBv;
     }
 }
