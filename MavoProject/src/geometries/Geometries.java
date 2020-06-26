@@ -16,6 +16,8 @@ import primitives.Ray;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import static geometries.BoundaryVolume.getDistance;
+
 
 public class Geometries implements Intersectable {
 
@@ -145,4 +147,40 @@ public class Geometries implements Intersectable {
     	
 
 }
+	
+	public void groupGeometries(double max_distance) {
+		 if(getAmount()< 2) return;
+		 while (getAmount()> 1) {
+			 group(max_distance);
+			
+		}
+		 
+	
+	}
+	
+	private Geometries group( double max_distance  ) {
+		Intersectable g1 = new Geometries( _geometries.get(0));
+		Geometries same_distance =new Geometries(g1);
+		Geometries not_same_distance =new Geometries();
+
+		if(getAmount() > 1) {
+			for (int i = 1; i < getAmount(); i++) {
+				Intersectable g2 = new Geometries( _geometries.get(i));
+				 double distance = getDistance(g1, g2);
+				 if(distance <= max_distance ) {
+					 same_distance.add(g2);
+				 }
+				 else {
+					 not_same_distance.add(g2);
+				 }
+			 }
+		}
+		not_same_distance.add(same_distance);
+		
+		_geometries = new ArrayList<Intersectable>();
+		this.add(not_same_distance);
+	    return not_same_distance;
+	}
+
+
 }

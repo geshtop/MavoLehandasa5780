@@ -13,7 +13,7 @@ public class BoundaryVolume {
 	public BoundaryVolume(Point3D _min, Point3D _max) {
 		this.min = _min;
 		this.max = _max;
-		// TODO Auto-generated constructor stub
+
 	}
 	//פונקציה שמקבלת קרן ומחזירה נוקודת חיתוך עם הקופסה
 	public boolean boundingIntersection(Ray ray) {
@@ -52,6 +52,64 @@ public class BoundaryVolume {
 	}
 
 	
+	/***
+	 * 
+	 * @param g1  group of geometries
+	 * @param g2  group of geometries
+	 * @return the distance between boxes
+	 */
+	public static double getDistance(Intersectable g1 , Intersectable g2) {
+		BoundaryVolume box1 = g1.boundaryVolume();
+		BoundaryVolume box2 = g2.boundaryVolume();
+		if(doOverlap(g1,g2)) return 0;
+		double dis1 = box1.min.distance(box2.min);
+		double dis2 = box1.min.distance(box2.max);
+		double dis3 = box1.max.distance(box2.min);
+		
+		double dis4 = box1.max.distance(box2.max);
+		double min_disatnce = dis1;
+		if(dis2 < min_disatnce) min_disatnce = dis2;
+		if(dis3 < min_disatnce) min_disatnce = dis3;
+		if(dis4 < min_disatnce) min_disatnce = dis4;
+		
+		System.out.println("The distance between [(" + box1.min.toString() +"),(" + box1.max.toString()+ ")] and [(" +  box2.min.toString() +"),(" + box2.max.toString() + ")] is " + min_disatnce ); 
+		
+		return min_disatnce;
+		
+	}
+	/***
+	 * 
+	 * @param g1 group of geometries
+	 * @param g2 group of geometries
+	 * @return boolean if the 2 groups boundary are overlap
+	 */
+	public static boolean doOverlap(Intersectable g1 , Intersectable g2 )  
+	{ 
+		BoundaryVolume box1 = g1.boundaryVolume();
+		BoundaryVolume box2 = g2.boundaryVolume();
+
+		// gives bottom-left point 
+	    // of intersection rectangle 
+	    double x5  = Math.max(box1.min.get_x().get(), box2.min.get_x().get()); 
+	    double y5  = Math.max(box1.min.get_y().get(), box2.min.get_y().get()); 
+	  
+	    // gives top-right point 
+	    // of intersection rectangle 
+	    double x6  = Math.min(box1.max.get_x().get(), box2.max.get_x().get()); 
+	    double y6  = Math.min(box1.max.get_y().get(), box2.max.get_y().get()); 
+
+	  
+	    // no intersection 
+	    if (x5 > x6 || y5 > y6)  
+	    { 
+	        System.out.println("No intersection"); 
+	        return false; 
+	    } 
+	    
+	    System.out.println("Has intersection"); 
+		return true; 
+	} 
+
 	
 
 }

@@ -153,7 +153,6 @@ public class Polygon extends Geometry {
 	
 	public BoundaryVolume boundaryVolume() {
 		if(this.currentBv!= null ) return this.currentBv;
-		System.out.println("calculate ");
     	double minX= _vertices.get(0).get_x().get();
     	double maxX = minX;
     	double minY= _vertices.get(0).get_y().get();
