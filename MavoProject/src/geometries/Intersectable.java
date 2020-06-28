@@ -18,6 +18,10 @@ public interface Intersectable {
 	 */
 	List<GeoPoint> findIntersections(Ray ray);
 
+	/**
+	 * This return the Boundry volume for an element
+	 * @return
+	 */
 	BoundaryVolume boundaryVolume();
 
 	

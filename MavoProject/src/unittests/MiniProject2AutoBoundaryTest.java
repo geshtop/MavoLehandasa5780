@@ -46,13 +46,13 @@ public class MiniProject2AutoBoundaryTest {
 		Geometries bg_plane_group =new Geometries(bg_plane);
 
 		int position = 0;
-		Polygon main_rectangle = new Polygon(new Color(20, 20, 20), new Material(0.5, 0.5, 300, 0, 0), //
+		Polygon main_rectangle = new Polygon(new Color(255, 255, 255), new Material(0.5, 0.5, 300, 0, 0), //
 				new Point3D(-850, 350, position),//top left 
 				new Point3D(-350, 350, position),//top right
 				new Point3D(-350, 800, position), //bottom right
 				new Point3D(-850, 800, position)); // bottom left
 		Geometries main_rectangle_group =new Geometries(main_rectangle);
-		Polygon side_right_rectangle = new Polygon(new Color(0, 20, 20), new Material(0.5, 0.5, 300, 0, 0), //
+		Polygon side_right_rectangle = new Polygon(new Color(255, 250, 240), new Material(0.5, 0.5, 300, 0, 0), //
 				new Point3D(-350, 350, position),//top left 
 				new Point3D(100, -50, position),//top right
 				new Point3D(100, 300, position), //bottom right
@@ -60,7 +60,7 @@ public class MiniProject2AutoBoundaryTest {
 		Geometries side_right_rectangle_group =new Geometries( side_right_rectangle);
 		
 		
-		Triangle main_top_triangle =   new Triangle(new Color(0, 0, 20), new Material(0.8, 0.2, 300),
+		Triangle main_top_triangle =   new Triangle(new Color(255, 0, 0), new Material(0.8, 0.2, 300),
 		          new Point3D(-850, 350, position),
 		          new Point3D(-350, 350, position),
 		          new Point3D(-550, 0, position));
@@ -73,7 +73,7 @@ public class MiniProject2AutoBoundaryTest {
 //		          new Point3D(-550, 0, position));
 //		Geometries second_top_triangle_group =new Geometries(second_top_triangle);
 		
-		Polygon side_top_rectangle = new Polygon(new Color(0, 10, 20), new Material(0.5, 0.5, 300, 0, 0), //
+		Polygon side_top_rectangle = new Polygon(new Color(255, 0, 0), new Material(0.5, 0.5, 300, 0, 0), //
 				new Point3D(-550, 0, position),//top left 
 				new Point3D(-50, -250, position),//top right
 				new Point3D(100, -50, position), //bottom right
@@ -133,15 +133,7 @@ public class MiniProject2AutoBoundaryTest {
 				sphere18,sphere19,
 				sphere20,
 				plane
-				
-				//center_sphare_group,
-				//top_sphare_group,
-				//main_bottom_triangle_group,
-				
-				
-				//side_right_triangle_group,
-				//out_triangle,
-				//out_triangle_group
+
 				);
 		
 				main_group.groupGeometries(10);
@@ -185,7 +177,7 @@ public class MiniProject2AutoBoundaryTest {
 		List<LightSource> lights = new ArrayList<LightSource>();
 		//lights.add(point_light);
 		lights.add(directional_light);
-		lights.add(new DirectionalLight(new Color(300, 150, 150), new Vector(0, 0, 1)));
+		//lights.add(new DirectionalLight(new Color(300, 150, 150), new Vector(0, 0, 1)));
 //		lights.add(new PointLight(new Color(500, 250, 250),
 //                new Point3D(10, 10, 130),
 //                1, 0.0005, 0.0005));

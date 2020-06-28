@@ -224,6 +224,9 @@ public class MinitProject1Test {
 		Polygon square4 = new Polygon(new Color(0, 0, 0), new Material(0.1, 0.1, 300, 0.8, 0, 0, 1), //
 				new Point3D(-5, 20, 100), new Point3D(-50, 20, 100), new Point3D(-50, -50, 100),
 				new Point3D(-5, -50, 100));
+		
+		
+		
 		scene.addIntersectable(plane, plane2, //
 				sphere, sphere2, sphere3, sphere4, spherex1, spherex2, spherex3, spherex4, spherex11, spherex22, spherex33, spherex44 //
 				, square1, square2, square3, square4 //

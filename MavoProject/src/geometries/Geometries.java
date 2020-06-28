@@ -157,7 +157,11 @@ public class Geometries implements Intersectable {
 		 
 	
 	}
-	
+	/**
+	 * פונקציה המקבלת מרחק רצוי ומאחדת קבוצות בהתאמה לפי המרחק
+	 * @param max_distance
+	 * @return
+	 */
 	private Geometries group( double max_distance  ) {
 		Intersectable g1 = new Geometries( _geometries.get(0));
 		Geometries same_distance =new Geometries(g1);

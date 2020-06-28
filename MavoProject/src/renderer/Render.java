@@ -335,7 +335,10 @@ public class Render {
     
 
 
-
+/**
+ * getter for set the sample count
+ * @return
+ */
 	public int getSampleCount() {
 		return _sampleCount;
 	}
