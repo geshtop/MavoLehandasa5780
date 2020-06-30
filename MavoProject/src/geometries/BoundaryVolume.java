@@ -72,7 +72,7 @@ public class BoundaryVolume {
 		if(dis3 < min_disatnce) min_disatnce = dis3;
 		if(dis4 < min_disatnce) min_disatnce = dis4;
 		
-		System.out.println("The distance between [(" + box1.min.toString() +"),(" + box1.max.toString()+ ")] and [(" +  box2.min.toString() +"),(" + box2.max.toString() + ")] is " + min_disatnce ); 
+		//System.out.println("The distance between [(" + box1.min.toString() +"),(" + box1.max.toString()+ ")] and [(" +  box2.min.toString() +"),(" + box2.max.toString() + ")] is " + min_disatnce ); 
 		
 		return min_disatnce;
 		
@@ -102,11 +102,11 @@ public class BoundaryVolume {
 	    // no intersection 
 	    if (x5 > x6 || y5 > y6)  
 	    { 
-	        System.out.println("No intersection"); 
+	       // System.out.println("No intersection"); 
 	        return false; 
 	    } 
 	    
-	    System.out.println("Has intersection"); 
+	    //System.out.println("Has intersection"); 
 		return true; 
 	} 
 

@@ -315,17 +315,21 @@ public class Render {
 				}
 			}
 		}
-		
+		//getKR mekadem havraka
 		double kr = mat.getKr();
 		double kkr = k * kr;
+		//KKR 
 		if (kkr > MIN_CALC_COLOR_K) {
+			//chishuv vecktor mishtach mavrik
 			Ray reflectedRay = constructReflectedRay(n, geopoint.point, inRay);
 			color = color.add(calcSampledColor(mat.getMatte(), //
 					level, reflectedRay, n, kkr).scale(kr));
 		}
+		//getkt mekadem shkifut
 		double kt = geopoint.geometry.getMaterial().getKt();
 		double kkt = k * kt;
 		if (kkt > MIN_CALC_COLOR_K) {
+			//chishuv ray mishtch shakuf
 			Ray refractedRay = constructRefractedRay(n, geopoint.point, inRay);
 			color = color.add(calcSampledColor(mat.getDiffusion(), //
 					level, refractedRay, n, kkt).scale(kt));
@@ -379,6 +383,8 @@ public class Render {
 		GeoPoint gp = findClosestIntersection(refRay);
 		Color bg = scene.getBackground();
 		Color color = gp == null ? bg : calcColor(gp, refRay, level - 1, k);
+		
+		//from here is the mini project 1 
 
 		if (radius == 0)
 			return color;

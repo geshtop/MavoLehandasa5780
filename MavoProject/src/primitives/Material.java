@@ -5,7 +5,9 @@ public class Material {
 	double _kD;
 	double _kS;
 	int _nShininess;
+	//mekadem mishtach havraka // mishtach mavrik kmo maraa
 	double _kR;
+	// mekadem shel mishtach shakuf
 	double _kT;
 	double _matte;
 	double _diffusion;

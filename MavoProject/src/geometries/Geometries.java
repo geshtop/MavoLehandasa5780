@@ -48,6 +48,7 @@ public class Geometries implements Intersectable {
     public void add(Intersectable... geometries) {
 
         _geometries.addAll(Arrays.asList(geometries));
+        this.currentBv = null; // to recalculate the boundary
     }
 
 
@@ -150,11 +151,9 @@ public class Geometries implements Intersectable {
 	
 	public void groupGeometries(double max_distance) {
 		 if(getAmount()< 2) return;
-		 while (getAmount()> 1) {
-			 group(max_distance);
-			
-		}
 		 
+			 group(max_distance);
+
 	
 	}
 	/**
@@ -162,28 +161,36 @@ public class Geometries implements Intersectable {
 	 * @param max_distance
 	 * @return
 	 */
-	private Geometries group( double max_distance  ) {
-		Intersectable g1 = new Geometries( _geometries.get(0));
-		Geometries same_distance =new Geometries(g1);
-		Geometries not_same_distance =new Geometries();
-
-		if(getAmount() > 1) {
+	private void group( double max_distance  ) {
+		if(getAmount() < 2 ) return;
+		
+		
+		boolean founded = true;
+		while (getAmount() > 1 &&  founded) {
+			Geometries g1 = new Geometries( _geometries.get(0));
+			Geometries same_distance =new Geometries(g1);
+			Geometries not_same_distance =new Geometries();
+			founded = false;
 			for (int i = 1; i < getAmount(); i++) {
-				Intersectable g2 = new Geometries( _geometries.get(i));
-				 double distance = getDistance(g1, g2);
+				Geometries g2 = new Geometries( _geometries.get(i));
+				 double distance = getDistance(same_distance, g2);
 				 if(distance <= max_distance ) {
-					 same_distance.add(g2);
+					 same_distance.add(g2._geometries.get(0));
+					 founded = true;
 				 }
 				 else {
-					 not_same_distance.add(g2);
+					 not_same_distance.add(g2._geometries.get(0));
 				 }
-			 }
+			}
+			
+			not_same_distance.add(same_distance);
+			_geometries = new ArrayList<Intersectable>();
+			_geometries.addAll(not_same_distance._geometries);
+
+			
 		}
-		not_same_distance.add(same_distance);
 		
-		_geometries = new ArrayList<Intersectable>();
-		this.add(not_same_distance);
-	    return not_same_distance;
+
 	}
 
 
