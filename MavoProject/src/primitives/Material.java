@@ -9,7 +9,9 @@ public class Material {
 	double _kR;
 	// mekadem shel mishtach shakuf
 	double _kT;
+	//radius shel havraka
 	double _matte;
+	//radius shel shkifut
 	double _diffusion;
 	
 	// ***************** Constructors ********************** //

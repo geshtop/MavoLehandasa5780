@@ -410,7 +410,13 @@ public class MiniProject2AutoBoundaryTest {
 			
 		}
 		
+		/////////////////////////////////////////
+		/////////////////////////////////////////
+		/////////////////////////////////////////
+		/////////////////////////////////////////
 		/// here grouping the geometries
+		/////////////////////////////////////////
+		/////////////////////////////////////////
 
 		main_group.groupGeometries(200);
 	
@@ -460,18 +466,10 @@ public class MiniProject2AutoBoundaryTest {
 //		
 //		boolean b6 = doOverlap(bg_plane_group, top_sphare_group);
 //		assertEquals("למשטח יש נקודות חפיפה עם כל האלמנטים",b6, true); 
-		
-		scene.addIntersectable(
-				//bg_plane_group,
-				//main_group
+		scene.addIntersectable(				//bg_plane_group, 				//main_group
 				main_group1, main_group2,main_group3,main_group4
 				);
-		
-		
 
-		
-		
-		
 		//double d1 = getDistance(main_rectangle_group, out_triangle_group);
 		//double d2 = getDistance(main_rectangle_group, top_sphare_group);
 
